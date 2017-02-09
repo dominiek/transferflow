@@ -510,6 +510,6 @@ def train(train_images, test_images, checkpoint_file, options={}):
                 print(print_str %
                       (i, adjusted_lr, train_loss,
                        test_accuracy * 100, dt * 1000 if i > 0 else 0))
-            #if global_step.eval() % H['logging']['save_iter'] == 0 or global_step.eval() == num_steps - 1:
-            #
-        saver.save(sess, checkpoint_file, global_step=global_step)
+            if global_step.eval() % H['logging']['save_iter'] == 0 or global_step.eval() == num_steps:
+                saver.save(sess, checkpoint_file, global_step=global_step)
+        #saver.save(sess, checkpoint_file, global_step=global_step)
