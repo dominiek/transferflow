@@ -62,7 +62,7 @@ def prepare_annotations(images, H, jitter):
         random.shuffle(annos)
         for anno in annos:
             I = imread(anno.imageName)
-	    #Skip Greyscale images
+    	    #Skip Greyscale images
             if len(I.shape) < 3:
                 continue
             if I.shape[2] == 4:
@@ -148,7 +148,6 @@ def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_l
         acc_rects = stitch_rects(all_rects, tau)
     else:
         acc_rects = all_rects_r
-
 
     if show_suppressed:
         pairs = [(all_rects_r, (255, 0, 0))]

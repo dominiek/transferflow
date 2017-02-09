@@ -25,9 +25,8 @@ class ObjectDetectionTest(unittest.TestCase):
     def test_2_run_faces(self):
         runner = Runner(test_dir + '/fixtures/tmp/faces_test.chkpt-1000')
         new_img, rects = runner.run(test_dir + '/fixtures/images/faces1.png')
-        print('rects', rects)
-        print('rects', rects[0])
-        self.assertEqual(len(rects), 17)
+        self.assertEqual(len(rects) >= 15, True)
+        self.assertEqual(len(rects) <= 20, True)
         misc.imsave(test_dir + '/fixtures/tmp/faces_validation1.png', new_img)
 
     def test_3_run_faces(self):
