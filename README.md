@@ -9,12 +9,12 @@ _Warning: work in progress.._
 ## Unit Tests
 
 ```bash
-python test/object_detection_train_test.py
+python test/object_detection_test.py
 ```
 ## Todo
 
-* Finalize train unit test for object detection
-* Create classify unit test for object Detection
+* Fix checkpoint saving
+* Improve model persistence
 * Get rid of more unnecessary dependencies
 * Refactor TensorBox originated codebase
 * Bring in classification retrain code from TF

@@ -19,6 +19,7 @@ DEFAULT_SETTINGS = {
         "weights": "",
         "head_weights": [1.0, 0.1]
     },
+    "num_steps": 1000,
     "use_lstm": False,
     "use_rezoom": True,
     "biggest_box_px": 10000,

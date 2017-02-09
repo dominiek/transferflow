@@ -293,6 +293,7 @@ def build_forward_backward(H, x, phase, boxes, flags):
                 tf.histogram_summary(phase + '/delta_hist0_y', pred_boxes_deltas[:, 0, 1])
                 tf.histogram_summary(phase + '/delta_hist0_w', pred_boxes_deltas[:, 0, 2])
                 tf.histogram_summary(phase + '/delta_hist0_h', pred_boxes_deltas[:, 0, 3])
+
                 loss += delta_boxes_loss
         else:
             loss = confidences_loss + boxes_loss
@@ -359,7 +360,7 @@ def build(H, q):
                                           confidences_loss['train'], boxes_loss['train'],
                                           confidences_loss['test'], boxes_loss['test'],
                                           ])
-            """
+
             for p in ['train', 'test']:
                 tf.scalar_summary('%s/accuracy' % p, accuracy[p])
                 tf.scalar_summary('%s/accuracy/smooth' % p, moving_avg.average(accuracy[p]))
@@ -369,7 +370,7 @@ def build(H, q):
                 tf.scalar_summary("%s/regression_loss" % p, boxes_loss[p])
                 tf.scalar_summary("%s/regression_loss/smooth" % p,
                     moving_avg.average(boxes_loss[p]))
-            """
+
 
         if phase == 'test':
             test_image = x
@@ -408,16 +409,16 @@ def build(H, q):
             smooth_op, global_step, learning_rate)
 
 
-def train(train_images, test_images, options={}):
+def train(train_images, test_images, checkpoint_file, options={}):
     '''
     Setup computation graph, run 2 prefetch data threads, and then run the main loop
     '''
 
-    print('train')
-
     H = DEFAULT_SETTINGS
     for key in options:
         H[key] = options[key]
+
+    num_steps = H['num_steps']
 
     x_in = tf.placeholder(tf.float32)
     confs_in = tf.placeholder(tf.float32)
@@ -447,10 +448,10 @@ def train(train_images, test_images, options={}):
      smooth_op, global_step, learning_rate) = build(H, q)
 
     saver = tf.train.Saver(max_to_keep=None)
-    #writer = tf.train.SummaryWriter(
-    #    logdir=H['save_dir'],
-    #    flush_secs=10
-    #)
+    writer = tf.train.SummaryWriter(
+        logdir='/tmp/bla',
+        flush_secs=10
+    )
 
     with tf.Session(config=config) as sess:
         tf.train.start_queue_runners(sess=sess)
@@ -469,24 +470,18 @@ def train(train_images, test_images, options={}):
 
         tf.set_random_seed(H['solver']['rnd_seed'])
         sess.run(tf.initialize_all_variables())
-        #writer.add_graph(sess.graph)
-        weights_str = H['solver']['weights']
-        if len(weights_str) > 0:
-            print('Restoring from: %s' % weights_str)
-            saver.restore(sess, weights_str)
-        else:
-            init_fn = slim.assign_from_checkpoint_fn(
-                  H['slim_ckpt'],
-                  [x for x in tf.all_variables() if x.name.startswith(H['slim_basename']) and H['solver']['opt'] not in x.name])
-            #init_fn = slim.assign_from_checkpoint_fn(
-                  #'%s/data/inception_v1.ckpt' % os.path.dirname(os.path.realpath(__file__)),
-                  #[x for x in tf.all_variables() if x.name.startswith('InceptionV1') and not H['solver']['opt'] in x.name])
-            init_fn(sess)
+        writer.add_graph(sess.graph)
+        init_fn = slim.assign_from_checkpoint_fn(
+              H['slim_ckpt'],
+              [x for x in tf.all_variables() if x.name.startswith(H['slim_basename']) and H['solver']['opt'] not in x.name])
+        #init_fn = slim.assign_from_checkpoint_fn(
+              #'%s/data/inception_v1.ckpt' % os.path.dirname(os.path.realpath(__file__)),
+              #[x for x in tf.all_variables() if x.name.startswith('InceptionV1') and not H['solver']['opt'] in x.name])
+        init_fn(sess)
 
         # train model for N iterations
         start = time.time()
-        max_iter = H['solver'].get('max_iter', 10000000)
-        for i in xrange(max_iter):
+        for i in xrange(num_steps):
             display_iter = H['logging']['display_iter']
             adjusted_lr = (H['solver']['learning_rate'] *
                            0.5 ** max(0, (i / H['solver']['learning_rate_step']) - 2))
@@ -504,7 +499,7 @@ def train(train_images, test_images, options={}):
                     _, _) = sess.run([loss['train'], accuracy['test'],
                                       summary_op, train_op, smooth_op,
                                      ], feed_dict=lr_feed)
-                #writer.add_summary(summary_str, global_step=global_step.eval())
+                writer.add_summary(summary_str, global_step=global_step.eval())
                 print_str = string.join([
                     'Step: %d',
                     'lr: %f',
@@ -515,6 +510,6 @@ def train(train_images, test_images, options={}):
                 print(print_str %
                       (i, adjusted_lr, train_loss,
                        test_accuracy * 100, dt * 1000 if i > 0 else 0))
-
-            #if global_step.eval() % H['logging']['save_iter'] == 0 or global_step.eval() == max_iter - 1:
-            #    saver.save(sess, ckpt_file, global_step=global_step)
+            #if global_step.eval() % H['logging']['save_iter'] == 0 or global_step.eval() == num_steps - 1:
+            #
+        saver.save(sess, checkpoint_file, global_step=global_step)
