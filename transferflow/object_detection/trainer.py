@@ -308,7 +308,7 @@ def build(H, q):
     arch = H
     solver = H["solver"]
 
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(solver.get('gpu', ''))
+    #os.environ['CUDA_VISIBLE_DEVICES'] = str(solver.get('gpu', ''))
 
     #gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8)
     gpu_options = tf.GPUOptions()
@@ -453,8 +453,9 @@ def train(train_images, test_images, checkpoint_file, options={}):
         flush_secs=10
     )
 
+    coordinator = tf.train.Coordinator()
     with tf.Session(config=config) as sess:
-        tf.train.start_queue_runners(sess=sess)
+        threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
         for phase in ['train', 'test']:
             # enqueue once manually to avoid thread start delay
             if phase == 'train':
@@ -510,6 +511,6 @@ def train(train_images, test_images, checkpoint_file, options={}):
                 print(print_str %
                       (i, adjusted_lr, train_loss,
                        test_accuracy * 100, dt * 1000 if i > 0 else 0))
-            if global_step.eval() % H['logging']['save_iter'] == 0 or global_step.eval() == num_steps:
-                saver.save(sess, checkpoint_file, global_step=global_step)
-        #saver.save(sess, checkpoint_file, global_step=global_step)
+	coordinator.request_stop()
+	coordinator.join(threads)
+        saver.save(sess, checkpoint_file, global_step=global_step)
