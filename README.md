@@ -1,5 +1,5 @@
 
-_Warning: work in progress.._
+_Warning: work in progress..._
 
 # Transfer Learning for Tensorflow
 
