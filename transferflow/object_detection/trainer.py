@@ -365,7 +365,9 @@ def train(train_images, test_images, checkpoint_file, options={}):
     Setup computation graph, run 2 prefetch data threads, and then run the main loop
     '''
 
-    logger.info('Invoking train() with {} training images and {} test images'.format(len(train_images), len(test_images)))
+    logger.info('Invoking train() with {} training images and {} test images)'.format(len(train_images), len(test_images)))
+
+    start_ts = time.time()
 
     settings = DEFAULT_SETTINGS
     for key in options:
@@ -408,7 +410,8 @@ def train(train_images, test_images, checkpoint_file, options={}):
 
     saver = tf.train.Saver(max_to_keep=None)
 
-    coordinator = tf.train.Coordinator()
+    logger.info('train() initialization took {}ms'.format(time.time() - start_ts))
+
     threads = []
     with tf.Session(config=config) as sess:
         for phase in ['train', 'test']:
@@ -461,7 +464,7 @@ def train(train_images, test_images, checkpoint_file, options={}):
                     'Softmax Test Accuracy: %.1f%%',
                     'Time/image (ms): %.1f'
                 ], ', ')
-                logging.info(print_str %
+                logger.info(print_str %
                       (i, adjusted_lr, train_loss,
                        test_accuracy * 100, dt * 1000 if i > 0 else 0))
 

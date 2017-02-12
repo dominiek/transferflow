@@ -1,5 +1,5 @@
 
-_Warning: work in progress.._
+_Warning: work in progress..._
 
 # Transfer Learning for Tensorflow
 
@@ -20,6 +20,7 @@ python test/object_detection_test.py
 ```
 ## Todo
 
+* Expand unit tests with more training options
 * Refactor TensorBox originated codebase
 * Improve model persistence
 * Untangle rectangle stitching and results from the image rendering
@@ -27,5 +28,7 @@ python test/object_detection_test.py
 * Bring in classification retrain code from TF
 * Add unit tests for Classification
 * Refactor
+* Get rid of Tensorflow deprecation warnings
+* Upgrade Tensorflow version
 * Allow for more fine grained training controls + unit tests
 * Experiment with different base models
