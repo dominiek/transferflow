@@ -20,10 +20,10 @@ python test/object_detection_test.py
 ```
 ## Todo
 
-* Make threads shut down gracefully
 * Refactor TensorBox originated codebase
 * Improve model persistence
 * Untangle rectangle stitching and results from the image rendering
+* Make threads shut down gracefully
 * Bring in classification retrain code from TF
 * Add unit tests for Classification
 * Refactor

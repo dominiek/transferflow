@@ -20,6 +20,9 @@ from tensorflow.python.framework import ops
 from tensorflow.python.ops import array_ops
 from . import DEFAULT_SETTINGS
 
+import logging
+logger = logging.getLogger("transferflow.object_detection")
+
 random.seed(0)
 np.random.seed(0)
 
@@ -362,6 +365,8 @@ def train(train_images, test_images, checkpoint_file, options={}):
     Setup computation graph, run 2 prefetch data threads, and then run the main loop
     '''
 
+    logger.info('Invoking train() with {} training images and {} test images'.format(len(train_images), len(test_images)))
+
     settings = DEFAULT_SETTINGS
     for key in options:
         settings[key] = options[key]
@@ -392,9 +397,10 @@ def train(train_images, test_images, checkpoint_file, options={}):
             learning_rate: settings['solver']['learning_rate']
         }
 
-    def thread_loop(sess, enqueue_op, phase, gen):
+    def thread_loop(sess, enqueue_op, phase, gen, stop_event):
         for d in gen:
-            print('doing stuff...')
+            if stop_event.is_set():
+                return
             sess.run(enqueue_op[phase], feed_dict=make_feed(d))
 
     (config, loss, accuracy, train_op,
@@ -413,8 +419,10 @@ def train(train_images, test_images, checkpoint_file, options={}):
                 gen = train_utils.load_data_gen(settings, test_images)
             d = gen.next()
             sess.run(enqueue_op[phase], feed_dict=make_feed(d))
+            thread_stop_event = threading.Event()
             thread = threading.Thread(target=thread_loop,
-                                 args=(sess, enqueue_op, phase, gen))
+                                 args=(sess, enqueue_op, phase, gen, thread_stop_event))
+            thread.stop_event = thread_stop_event
             threads.append(thread)
             thread.daemon = True
             thread.start()
@@ -453,10 +461,10 @@ def train(train_images, test_images, checkpoint_file, options={}):
                     'Softmax Test Accuracy: %.1f%%',
                     'Time/image (ms): %.1f'
                 ], ', ')
-                print(print_str %
+                logging.info(print_str %
                       (i, adjusted_lr, train_loss,
                        test_accuracy * 100, dt * 1000 if i > 0 else 0))
 
-        #for thread in threads:
-        #    thread.join()
+        for thread in threads:
+            thread.stop_event.set()
         saver.save(sess, checkpoint_file, global_step=global_step)

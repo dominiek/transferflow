@@ -10,6 +10,9 @@ from scipy import misc
 from transferflow.object_detection import trainer
 from transferflow.object_detection.runner import Runner, run
 from transferflow.utils import *
+import logging
+logger = logging.getLogger("transferflow")
+logger.setLevel(logging.DEBUG)
 
 class ObjectDetectionTest(unittest.TestCase):
 
