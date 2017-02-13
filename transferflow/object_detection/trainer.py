@@ -369,6 +369,9 @@ def train(train_images, test_images, checkpoint_file, options={}):
 
     logger.info('Invoking train() with {} training images and {} test images)'.format(len(train_images), len(test_images)))
 
+
+    tf.reset_default_graph()
+
     start_ts = time.time()
 
     settings = DEFAULT_SETTINGS
