@@ -21,7 +21,7 @@ python test/object_detection_test.py
 ## Todo
 
 * Expand unit tests with more training options
-* Refactor TensorBox originated codebase
+* Create validation set facility
 * Improve model persistence
 * Untangle rectangle stitching and results from the image rendering
 * Make threads shut down gracefully
