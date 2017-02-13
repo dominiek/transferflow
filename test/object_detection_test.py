@@ -49,7 +49,7 @@ class ObjectDetectionTest(unittest.TestCase):
         runner = Runner(test_dir + '/fixtures/tmp/faces_lstm_test.chkpt-1000', {'use_lstm': True, 'rnn_len': 5})
         new_img, rects = runner.run(test_dir + '/fixtures/images/faces1.png')
 	print('num bounding boxes: {}'.format(len(rects)))
-        misc.imsave(test_dir + '/fixtures/tmp/faces_validation1_lstm.png', new_img)
+        misc.imsave(test_dir + '/fixtures/tmp/faces_lstm_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 200, True)
 
@@ -67,11 +67,18 @@ class ObjectDetectionTest(unittest.TestCase):
         trainer.train(train_bounding_boxes, test_bounding_boxes, test_dir + '/fixtures/tmp/faces_resnet_test.chkpt', options)
 
     def test_7_run_faces_resnet(self):
-        runner = Runner(test_dir + '/fixtures/tmp/faces_resnet_test.chkpt-1000')
+        options = {
+            'slim_top_lname': 'resnet_v1_101/block4',
+            'slim_attention_lname': 'resnet_v1_101/block1',
+            'slim_basename': 'resnet_v1_101',
+            'slim_ckpt': test_dir + '/../models/resnet_v1_101/model.ckpt'
+        }
+        runner = Runner(test_dir + '/fixtures/tmp/faces_resnet_test.chkpt-1000', options)
         new_img, rects = runner.run(test_dir + '/fixtures/images/faces1.png')
+	print('num bounding boxes: {}'.format(len(rects)))
         misc.imsave(test_dir + '/fixtures/tmp/faces_resnet_validation1.png', new_img)
-        self.assertEqual(len(rects) >= 15, True)
-        self.assertEqual(len(rects) <= 20, True)
+        self.assertEqual(len(rects) >= 12, True)
+        self.assertEqual(len(rects) <= 200, True)
 
 if __name__ == "__main__":
     unittest.main()
