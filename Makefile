@@ -12,3 +12,8 @@ download:
 		rm -f resnet_v1_101_2016_08_28.tar.gz; \
 		mkdir resnet_v1_101; \
 		mv resnet_v1_101.ckpt resnet_v1_101/model.ckpt
+
+
+.PHONY: test
+test:
+	python test/object_detection_test.py

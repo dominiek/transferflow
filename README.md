@@ -10,17 +10,17 @@ _Warning: work in progress..._
 
 ```bash
 pip -r requirements.txt
-cd transferflow/object_detection/utils; make; cd ../../../
+make
+make download
 ```
 
 ## Unit Tests
 
 ```bash
-python test/object_detection_test.py
+make test
 ```
 ## Todo
 
-* Expand unit tests with more training options
 * Create validation set facility
 * Improve model persistence
 * Untangle rectangle stitching and results from the image rendering
