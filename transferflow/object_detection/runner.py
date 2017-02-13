@@ -11,45 +11,6 @@ from . import DEFAULT_SETTINGS
 import cv2
 import argparse
 
-def run(checkpoint_file, image_path, options={}):
-
-    from matplotlib import pyplot as plt
-
-    H = DEFAULT_SETTINGS
-    H['tau'] = 0.25
-    H['min_confidence'] = 0.2
-    H['show_suppressed'] = True
-
-    for key in options:
-        H[key] = options[key]
-
-    tf.reset_default_graph()
-    x_in = tf.placeholder(tf.float32, name='x_in', shape=[H['image_height'], H['image_width'], 3])
-    if H['use_rezoom']:
-        pred_boxes, pred_logits, pred_confidences, pred_confs_deltas, pred_boxes_deltas = build_forward(H, tf.expand_dims(x_in, 0), 'test', reuse=None)
-        grid_area = H['grid_height'] * H['grid_width']
-        pred_confidences = tf.reshape(tf.nn.softmax(tf.reshape(pred_confs_deltas, [grid_area * H['rnn_len'], 2])), [grid_area, H['rnn_len'], 2])
-        if H['reregress']:
-            pred_boxes = pred_boxes + pred_boxes_deltas
-    else:
-        pred_boxes, pred_logits, pred_confidences = build_forward(H, tf.expand_dims(x_in, 0), 'test', reuse=None)
-
-    saver = tf.train.Saver()
-    with tf.Session() as sess:
-        sess.run(tf.initialize_all_variables())
-        saver.restore(sess, checkpoint_file)
-
-        orig_img = imread(image_path)[:,:,:3]
-        img = imresize(orig_img, (H["image_height"], H["image_width"]), interp='cubic')
-        feed = {x_in: img}
-        (np_pred_boxes, np_pred_confidences) = sess.run([pred_boxes, pred_confidences], feed_dict=feed)
-
-        new_img, rects = add_rectangles(H, [img], np_pred_confidences, np_pred_boxes,
-                                        use_stitching=True, rnn_len=H['rnn_len'], min_conf=H['min_confidence'], tau=H['tau'], show_suppressed=H['show_suppressed'])
-        plt.imshow(new_img)
-        plt.show()
-        return new_img, rects
-
 class Runner(object):
 
     def __init__(self, checkpoint_file, options={}):

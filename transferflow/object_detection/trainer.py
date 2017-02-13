@@ -122,6 +122,7 @@ def build_forward(settings, x, phase, reuse):
     Construct the forward model
     '''
 
+
     grid_size = settings['grid_width'] * settings['grid_height']
     outer_size = grid_size * settings['batch_size']
     input_mean = 117.
@@ -246,7 +247,8 @@ def build_forward_backward(settings, x, phase, boxes, flags):
         outer_boxes = tf.reshape(boxes, [outer_size, settings['rnn_len'], 4])
         outer_flags = tf.cast(tf.reshape(flags, [outer_size, settings['rnn_len']]), 'int32')
         if settings['use_lstm']:
-            hungarian_module = tf.load_op_library('utils/hungarian/hungarian.so')
+            this_dir = os.path.dirname(os.path.realpath(__file__))
+            hungarian_module = tf.load_op_library(this_dir + '/utils/hungarian/hungarian.so')
             assignments, classes, perm_truth, pred_mask = (
                 hungarian_module.hungarian(pred_boxes, outer_boxes, outer_flags, settings['solver']['hungarian_iou']))
         else:
