@@ -410,7 +410,7 @@ def train(train_images, test_images, checkpoint_file, options={}):
 
     saver = tf.train.Saver(max_to_keep=None)
 
-    logger.info('train() initialization took {}ms'.format(time.time() - start_ts))
+    logger.info('train() initialization took {}s'.format(time.time() - start_ts))
 
     threads = []
     with tf.Session(config=config) as sess:
