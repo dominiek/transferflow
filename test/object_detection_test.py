@@ -27,15 +27,22 @@ class ObjectDetectionTest(unittest.TestCase):
 
     def test_2_run_faces(self):
         runner = Runner(test_dir + '/fixtures/tmp/faces_test.chkpt-1000')
-        new_img, rects = runner.run(test_dir + '/fixtures/images/faces1.png')
-    	print('num bounding boxes: {}'.format(len(rects)))
+        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')
+        print('num bounding boxes: {}'.format(len(rects)))
+        print('num raw bounding boxes: {}'.format(len(raw_rects)))
+        new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
+        new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
+        misc.imsave(test_dir + '/fixtures/tmp/faces_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 20, True)
-        misc.imsave(test_dir + '/fixtures/tmp/faces_validation1.png', new_img)
 
     def test_3_run_faces(self):
         runner = Runner(test_dir + '/fixtures/models/faces_test.chkpt-1000')
-        new_img, rects = runner.run(test_dir + '/fixtures/images/faces2.png')
+        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces2.png')
+        print('num bounding boxes: {}'.format(len(rects)))
+        print('num raw bounding boxes: {}'.format(len(raw_rects)))
+        new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
+        new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
         misc.imsave(test_dir + '/fixtures/tmp/faces_validation2.png', new_img)
         self.assertEqual(len(rects), 12)
 
@@ -47,8 +54,10 @@ class ObjectDetectionTest(unittest.TestCase):
 
     def test_5_run_faces_lstm(self):
         runner = Runner(test_dir + '/fixtures/tmp/faces_lstm_test.chkpt-1000', {'use_lstm': True, 'rnn_len': 5})
-        new_img, rects = runner.run(test_dir + '/fixtures/images/faces1.png')
-	print('num bounding boxes: {}'.format(len(rects)))
+        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')
+        new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
+        new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
+        print('num bounding boxes: {}'.format(len(rects)))
         misc.imsave(test_dir + '/fixtures/tmp/faces_lstm_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 200, True)
@@ -74,11 +83,14 @@ class ObjectDetectionTest(unittest.TestCase):
             'slim_ckpt': test_dir + '/../models/resnet_v1_101/model.ckpt'
         }
         runner = Runner(test_dir + '/fixtures/tmp/faces_resnet_test.chkpt-1000', options)
-        new_img, rects = runner.run(test_dir + '/fixtures/images/faces1.png')
-	print('num bounding boxes: {}'.format(len(rects)))
+        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')
+        new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
+        new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
+        print('num bounding boxes: {}'.format(len(rects)))
         misc.imsave(test_dir + '/fixtures/tmp/faces_resnet_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 200, True)
+
 
 if __name__ == "__main__":
     unittest.main()

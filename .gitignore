@@ -1,3 +1,4 @@
 *.pyc
 test/fixtures/tmp/*
 models/resnet_v1_101
+.DS_Store

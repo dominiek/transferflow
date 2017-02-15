@@ -5,7 +5,7 @@ import json
 from scipy.misc import imread, imresize
 
 from trainer import build_forward
-from utils.train_utils import add_rectangles, rescale_boxes
+from utils.train_utils import calculate_rectangles, rescale_boxes
 from . import DEFAULT_SETTINGS
 
 import cv2
@@ -57,6 +57,6 @@ class Runner(object):
         feed = {x_in: img}
         (np_pred_boxes, np_pred_confidences) = self.sess.run([pred_boxes, pred_confidences], feed_dict=feed)
 
-        new_img, rects = add_rectangles(H, [img], np_pred_confidences, np_pred_boxes,
-                                        use_stitching=True, rnn_len=H['rnn_len'], min_conf=H['min_confidence'], tau=H['tau'], show_suppressed=H['show_suppressed'])
-        return new_img, rects
+        rects, raw_rects = calculate_rectangles(H, np_pred_confidences, np_pred_boxes,
+                                        use_stitching=True, rnn_len=H['rnn_len'], tau=H['tau'])
+        return img, rects, raw_rects

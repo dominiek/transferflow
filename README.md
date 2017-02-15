@@ -21,14 +21,14 @@ make test
 ```
 ## Todo
 
-* Create validation set facility
-* Improve model persistence
 * Untangle rectangle stitching and results from the image rendering
-* Make threads shut down gracefully
+* Improve model persistence
 * Bring in classification retrain code from TF
 * Add unit tests for Classification
 * Refactor
 * Get rid of Tensorflow deprecation warnings
 * Upgrade Tensorflow version
-* Allow for more fine grained training controls + unit tests
+* Create validation set facility
+* Refactor TensorBox originated code
+* Make threads shut down gracefully
 * Experiment with different base models

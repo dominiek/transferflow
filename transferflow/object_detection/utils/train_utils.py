@@ -116,8 +116,7 @@ def load_data_gen(H, images, jitter=False):
 
         yield output
 
-def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_len=1, min_conf=0.1, show_removed=True, tau=0.25, show_suppressed=True):
-    image = np.copy(orig_image[0])
+def calculate_rectangles(H, confidences, boxes, use_stitching=False, rnn_len=1, tau=0.25):
     num_cells = H["grid_height"] * H["grid_width"]
     boxes_r = np.reshape(boxes, (-1,
                                  H["grid_height"],
@@ -149,20 +148,7 @@ def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_l
     else:
         acc_rects = all_rects_r
 
-    if show_suppressed:
-        pairs = [(all_rects_r, (255, 0, 0))]
-    else:
-        pairs = []
-    pairs.append((acc_rects, (0, 255, 0)))
-    for rect_set, color in pairs:
-        for rect in rect_set:
-            if rect.confidence > min_conf:
-                cv2.rectangle(image,
-                    (rect.cx-int(rect.width/2), rect.cy-int(rect.height/2)),
-                    (rect.cx+int(rect.width/2), rect.cy+int(rect.height/2)),
-                    color,
-                    2)
-
+    """
     rects = []
     for rect in acc_rects:
         r = AnnoRect()
@@ -172,8 +158,9 @@ def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_l
         r.y2 = rect.cy + rect.height/2.
         r.score = rect.true_confidence
         rects.append(r)
+    """
 
-    return image, rects
+    return acc_rects, all_rects_r
 
 def to_x1y1x2y2(box):
     w = tf.maximum(box[:, 2:3], 1)
