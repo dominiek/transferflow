@@ -21,8 +21,8 @@ make test
 ```
 ## Todo
 
-* Improve model persistence
-* Fix deprecation warnings
+* Improve model persistence: naming
+* Improve model persistence: slim down model (only save what's needed)
 * Bring in classification retrain code from TF
 * Add unit tests for Classification
 * Refactor
