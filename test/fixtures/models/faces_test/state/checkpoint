@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/dodo/checkouts/transferflow/test/fixtures/tmp/faces_test/state/model"
+all_model_checkpoint_paths: "/home/dodo/checkouts/transferflow/test/fixtures/tmp/faces_test/state/model"

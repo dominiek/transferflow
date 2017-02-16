@@ -19,13 +19,23 @@ class ObjectDetectionTest(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_1_train_faces(self):
+    def test_1_run_faces(self):
+        runner = Runner(test_dir + '/fixtures/models/faces_test')
+        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces2.png')
+        print('num bounding boxes: {}'.format(len(rects)))
+        print('num raw bounding boxes: {}'.format(len(raw_rects)))
+        new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
+        new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
+        misc.imsave(test_dir + '/fixtures/tmp/faces_validation2.png', new_img)
+        self.assertEqual(len(rects), 14)
+
+    def test_2_train_faces(self):
         bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
         train_bounding_boxes = bounding_boxes[0:180]
         test_bounding_boxes = bounding_boxes[180:]
-        trainer.train(train_bounding_boxes, test_bounding_boxes, test_dir + '/fixtures/tmp/faces_test', {'num_steps': 10})
+        trainer.train(train_bounding_boxes, test_bounding_boxes, test_dir + '/fixtures/tmp/faces_test', {'num_steps': 1000})
 
-    def test_2_run_faces(self):
+    def test_3_run_faces(self):
         runner = Runner(test_dir + '/fixtures/tmp/faces_test')
         resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')
         print('num bounding boxes: {}'.format(len(rects)))
@@ -35,17 +45,7 @@ class ObjectDetectionTest(unittest.TestCase):
         misc.imsave(test_dir + '/fixtures/tmp/faces_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 20, True)
-    """
-    def test_3_run_faces(self):
-        runner = Runner(test_dir + '/fixtures/models/faces_test')
-        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces2.png')
-        print('num bounding boxes: {}'.format(len(rects)))
-        print('num raw bounding boxes: {}'.format(len(raw_rects)))
-        new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
-        new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
-        misc.imsave(test_dir + '/fixtures/tmp/faces_validation2.png', new_img)
-        self.assertEqual(len(rects), 12)
-    """
+
     def test_4_train_faces_lstm(self):
         bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
         train_bounding_boxes = bounding_boxes[0:180]
