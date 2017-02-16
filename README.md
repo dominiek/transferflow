@@ -21,13 +21,15 @@ make test
 ```
 ## Todo
 
-* Untangle rectangle stitching and results from the image rendering
 * Improve model persistence
+* Fix deprecation warnings
 * Bring in classification retrain code from TF
 * Add unit tests for Classification
 * Refactor
 * Get rid of Tensorflow deprecation warnings
 * Upgrade Tensorflow version
+* Add non-face example
+* Allow object detection of different image sizes
 * Create validation set facility
 * Refactor TensorBox originated code
 * Make threads shut down gracefully

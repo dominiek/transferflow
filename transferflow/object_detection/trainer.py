@@ -19,6 +19,7 @@ except ImportError:
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import array_ops
 from . import DEFAULT_SETTINGS
+from transferflow.utils import *
 
 import logging
 logger = logging.getLogger("transferflow.object_detection")
@@ -362,7 +363,7 @@ def build(settings, queue):
             smooth_op, global_step, learning_rate)
 
 
-def train(train_images, test_images, checkpoint_file, options={}):
+def train(train_images, test_images, model_path, options={}):
     '''
     Setup computation graph, run 2 prefetch data threads, and then run the main loop
     '''
@@ -475,4 +476,4 @@ def train(train_images, test_images, checkpoint_file, options={}):
 
         for thread in threads:
             thread.stop_event.set()
-        saver.save(sess, checkpoint_file, global_step=global_step)
+        save_model(sess, model_path)

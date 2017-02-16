@@ -7,13 +7,14 @@ from scipy.misc import imread, imresize
 from trainer import build_forward
 from utils.train_utils import calculate_rectangles, rescale_boxes
 from . import DEFAULT_SETTINGS
+from transferflow.utils import *
 
 import cv2
 import argparse
 
 class Runner(object):
 
-    def __init__(self, checkpoint_file, options={}):
+    def __init__(self, model_file, options={}):
 
         H = DEFAULT_SETTINGS
         H['tau'] = 0.25
@@ -42,7 +43,7 @@ class Runner(object):
         saver = tf.train.Saver()
         self.sess = tf.Session()
         self.sess.run(tf.initialize_all_variables())
-        saver.restore(self.sess, checkpoint_file)
+        load_model(self.sess, model_file, exclude_meta=True)
 
     def run(self, image_path):
 
