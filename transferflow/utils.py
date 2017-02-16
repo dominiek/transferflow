@@ -7,6 +7,7 @@ from tensorflow.python.framework import graph_util
 from tensorflow.python.platform import gfile
 import tensorflow as tf
 import shutil
+import time
 
 import logging
 logger = logging.getLogger("transferflow.utils")
@@ -58,6 +59,7 @@ def save_model(sess, path):
     saver.save(sess, path + '/state/model')
 
 def load_model(sess, path, namespace=None, exclude_meta=False):
+    start_ts = time.time()
     if not os.path.isdir(path):
         raise Exception('No model dir found at {}'.format(path))
     if exclude_meta:
@@ -65,3 +67,4 @@ def load_model(sess, path, namespace=None, exclude_meta=False):
     else:
         saver = tf.train.import_meta_graph(path + '/state/model.meta')
     saver.restore(sess, path + '/state/model')
+    logger.info('Loaded model from {} (took={}s, num_tensors={}, tensor_namespaces={})'.format(path, time.time()-start_ts, len(get_tensors(sess)), ','.join(get_tensor_namespaces(sess))))

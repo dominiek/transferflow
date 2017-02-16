@@ -185,13 +185,13 @@ def build_forward(settings, x, phase, reuse):
             pred_logits.append(tf.reshape(tf.matmul(output, conf_weights),
                                          [outer_size, 1, settings['num_classes']]))
 
-        pred_boxes = tf.concat(1, pred_boxes)
-        pred_logits = tf.concat(1, pred_logits)
+        pred_boxes = tf.concat(1, pred_boxes, name='pred_boxes_{}'.format(phase))
+        pred_logits = tf.concat(1, pred_logits, name='pred_logits_{}'.format(phase))
         pred_logits_squash = tf.reshape(pred_logits,
                                         [outer_size * settings['rnn_len'], settings['num_classes']])
         pred_confidences_squash = tf.nn.softmax(pred_logits_squash)
         pred_confidences = tf.reshape(pred_confidences_squash,
-                                      [outer_size, settings['rnn_len'], settings['num_classes']])
+                                      [outer_size, settings['rnn_len'], settings['num_classes']], name='pred_confidences_{}'.format(phase))
 
         if settings['use_rezoom']:
             pred_confs_deltas = []
@@ -224,9 +224,9 @@ def build_forward(settings, x, phase, reuse):
                 scale = settings.get('rezoom_conf_scale', 50)
                 pred_confs_deltas.append(tf.reshape(tf.matmul(ip1, delta_confs_weights) * scale,
                                                     [outer_size, 1, settings['num_classes']]))
-            pred_confs_deltas = tf.concat(1, pred_confs_deltas)
+            pred_confs_deltas = tf.concat(1, pred_confs_deltas, name='pred_confs_deltas_{}'.format(phase))
             if settings['reregress']:
-                pred_boxes_deltas = tf.concat(1, pred_boxes_deltas)
+                pred_boxes_deltas = tf.concat(1, pred_boxes_deltas, name='pred_boxes_deltas_{}'.format(phase))
             return pred_boxes, pred_logits, pred_confidences, pred_confs_deltas, pred_boxes_deltas
 
     return pred_boxes, pred_logits, pred_confidences
