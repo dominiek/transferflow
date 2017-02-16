@@ -19,7 +19,6 @@ class ObjectDetectionTest(unittest.TestCase):
     def setUp(self):
         pass
 
-    """
     def test_1_run_faces(self):
         runner = Runner(test_dir + '/fixtures/models/faces_test')
         resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces2.png')
@@ -28,8 +27,7 @@ class ObjectDetectionTest(unittest.TestCase):
         new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
         new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
         misc.imsave(test_dir + '/fixtures/tmp/faces_validation2.png', new_img)
-        self.assertEqual(len(rects), 14)
-    """
+        self.assertEqual(len(rects), 16)
 
     def test_2_train_faces(self):
         bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
