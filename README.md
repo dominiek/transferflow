@@ -21,16 +21,17 @@ make test
 ```
 ## Todo
 
-* Improve model persistence: naming
-* Improve model persistence: slim down model (only save what's needed)
-* Bring in classification retrain code from TF
-* Add unit tests for Classification
-* Refactor
+* Classification: Bring in classification retrain code from TF
+* Classification: Add unit tests for Classification
+* Classification: Refactor
 * Get rid of Tensorflow deprecation warnings
 * Upgrade Tensorflow version
-* Add non-face example
-* Allow object detection of different image sizes
-* Create validation set facility
-* Refactor TensorBox originated code
+* Object Detection: Clean up settings
+* Object Detection: Add non-face example
+* Object Detection: Allow object detection of different image sizes
+* Object Detection: Create validation set facility
+* Object Detection: Slim down size of detection models (lots of unused nodes in there)
+* Object Detection: Improve naming
+* Object Detection: Refactor TensorBox originated code
 * Make threads shut down gracefully
 * Experiment with different base models

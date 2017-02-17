@@ -17,6 +17,7 @@ def create_graph():
     increment = tf.Variable(1, name='increment')
     add = tf.add(state, increment)
     update = tf.assign(state, add, name='update')
+    tf.Variable(99, name='unused')
     return state, update, increment
 
 class UtilsTest(unittest.TestCase):
@@ -40,7 +41,7 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(session.run(state), 1)
         session.run(update, {increment: 2})
         self.assertEqual(session.run(state), 3)
-        self.assertEqual(len(get_tensors(session)), 11)
+        self.assertEqual(len(get_tensors(session)), 15)
 
         # Save state
         save_model(session, test_dir + '/fixtures/tmp/increment_without_meta')
@@ -56,7 +57,7 @@ class UtilsTest(unittest.TestCase):
         init = tf.global_variables_initializer()
         session.run(init)
         load_model(session, test_dir + '/fixtures/tmp/increment_without_meta', exclude_meta=True)
-        
+
 
         # Assert previous state
         self.assertEqual(session.run(state), 3)
@@ -79,7 +80,7 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(session.run('state:0'), 1)
         session.run('update', {'increment:0': 2})
         self.assertEqual(session.run('state:0'), 3)
-        self.assertEqual(len(get_tensors(session)), 11)
+        self.assertEqual(len(get_tensors(session)), 15)
 
         # Save state
         save_model(session, test_dir + '/fixtures/tmp/increment')

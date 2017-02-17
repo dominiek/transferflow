@@ -54,9 +54,14 @@ def save_model(sess, path):
         shutil.rmtree(path)
     os.mkdir(path)
     os.mkdir(path + '/state')
+
+    #sub_graph = graph_util.extract_sub_graph(sess.graph.as_graph_def(add_shapes=True), tensors)
+    #tf.train.export_meta_graph(path + '/state/model.meta', graph_def=sub_graph)
     logger.info('Saving model to {} (num_tensors={}, tensor_namespaces={})'.format(path, len(get_tensors(sess)), ','.join(get_tensor_namespaces(sess))))
     saver = tf.train.Saver()
-    saver.save(sess, path + '/state/model')
+    graph_def = sess.graph.as_graph_def(add_shapes=True)
+    tf.train.export_meta_graph(path + '/state/model.meta', graph_def=graph_def, as_text=True)
+    saver.save(sess, path + '/state/model', write_meta_graph=False)
 
 def load_model(sess, path, namespace=None, exclude_meta=False):
     start_ts = time.time()
