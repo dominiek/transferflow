@@ -1,0 +1,7 @@
+{
+  "engine": "tensorflow",
+  "name": "ImageNet Inception v3",
+  "description": "1000 ImageNet classes trained on the ImageNet Large Visual Recognition Challenge 2012 dataset",
+  "paper_url": "http://arxiv.org/abs/1512.00567",
+  "is_generic_model": true
+}

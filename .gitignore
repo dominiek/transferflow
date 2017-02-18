@@ -1,4 +1,6 @@
 *.pyc
 test/fixtures/tmp/*
 models/resnet_v1_101
-.DS_Store
+models/inception_v3/model.pb
+models/inception_v3/model.pbtxt
+*.DS_Store
