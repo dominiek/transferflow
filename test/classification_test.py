@@ -28,7 +28,6 @@ class ClassificationTest(unittest.TestCase):
     def test_3_run_scene_type(self):
         runner = Runner(test_dir + '/fixtures/tmp/scene_type_test')
         labels = runner.run(test_dir + '/fixtures/images/lake.jpg')
-        print('labels', labels)
         self.assertEqual(labels[0]['node_id'], 1)
 
 if __name__ == "__main__":
