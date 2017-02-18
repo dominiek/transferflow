@@ -1,10 +1,16 @@
 
-_Warning: work in progress..._
-
 # Transfer Learning for Tensorflow
+
+Transfer learning is the unhidden gem in the deep learning world. It allows model creation with significantly reduced training data and time by modifying existing rich deep learning models.
+
+The goal of this framework is to collect best-of-breed approaches, make them developer friendly so they can be used for real-world applications.
+
+Current capabilities:
 
 * Object Detection based on [TensorBox - GoogleNet/Overfeat/Rezoom](https://github.com/TensorBox/TensorBox)
 * Classification based on [Tensorflow - InceptionV3](https://www.tensorflow.org/how_tos/image_retraining/)
+
+_Please note that this is still under active development. See the TODO list in the bottom._
 
 ## Setup
 
@@ -14,7 +20,7 @@ make
 make download
 ```
 
-## Example: Classification Transfer Learning
+## Example: Transfer Learning for Classification
 
 First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/scene_type](test/fixtures/scaffolds/scene_type) that has two sets of images:
 
@@ -52,7 +58,7 @@ print(predicted_labels)
 
 This will output the predicted labels for this image ordered by score.
 
-## Example: Object Detection Transfer Learning
+## Example: Transfer Learning for Object Detection
 
 First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/faces](test/fixtures/scaffolds/faces) that has the following:
 
@@ -74,8 +80,6 @@ test_bounding_boxes = bounding_boxes[180:]
 
 # Output model path
 output_model_path = './faces_model'
-
-test_dir + '/fixtures/tmp/faces_test', {'num_steps': 1000}
 
 # Run training sequence for 1000 iterations
 trainer.train(train_bounding_boxes, test_bounding_boxes, output_model_path, {'num_steps': 1000})
