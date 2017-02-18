@@ -14,7 +14,6 @@ import random
 import re
 import sys
 import tarfile
-import logging
 
 import numpy as np
 from six.moves import urllib
@@ -23,6 +22,9 @@ import tensorflow as tf
 from tensorflow.python.framework import graph_util
 from tensorflow.python.framework import tensor_shape
 from tensorflow.python.platform import gfile
+
+import logging
+logger = logging.getLogger("transferflow.classification")
 
 from . import DEFAULT_SETTINGS
 
@@ -590,7 +592,7 @@ def train(scaffold_dir, base_graph_path, output_model_path, options={}):
 
     (train_step, cross_entropy, bottleneck_input, ground_truth_input, final_tensor) = add_final_training_ops(len(image_lists.keys()), final_tensor_name, bottleneck_tensor, settings['learning_rate'])
 
-    logging.info('Bottleneck files created, initializing TF')
+    logger.info('Bottleneck files created, initializing TF')
 
     # Set up all our weights to their initial default values.
     init = tf.initialize_variables(tf.all_variables())

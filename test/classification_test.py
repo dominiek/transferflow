@@ -8,6 +8,7 @@ sys.path.append(test_dir + '/../')
 import tensorflow as tf
 from scipy import misc
 from transferflow.classification import trainer
+from transferflow.classification.runner import Runner
 from transferflow.utils import *
 import logging
 logger = logging.getLogger("transferflow")
@@ -24,18 +25,11 @@ class ClassificationTest(unittest.TestCase):
         output_model_path = test_dir + '/fixtures/tmp/scene_type_test'
         trainer.train(scaffold_dir, base_graph_path, output_model_path, {'num_steps': 100})
 
-    """
-    def test_3_run_faces(self):
-        runner = Runner(test_dir + '/fixtures/tmp/faces_test')
-        resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')
-        print('num bounding boxes: {}'.format(len(rects)))
-        print('num raw bounding boxes: {}'.format(len(raw_rects)))
-        new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
-        new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
-        misc.imsave(test_dir + '/fixtures/tmp/faces_validation1.png', new_img)
-        self.assertEqual(len(rects) >= 12, True)
-        self.assertEqual(len(rects) <= 20, True)
-    """
+    def test_3_run_scene_type(self):
+        runner = Runner(test_dir + '/fixtures/tmp/scene_type_test')
+        labels = runner.run(test_dir + '/fixtures/images/lake.jpg')
+        print('labels', labels)
+        self.assertEqual(labels[0]['node_id'], 1)
 
 if __name__ == "__main__":
     unittest.main()

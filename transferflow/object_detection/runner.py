@@ -8,9 +8,6 @@ from utils.train_utils import calculate_rectangles, rescale_boxes
 from . import DEFAULT_SETTINGS
 from transferflow.utils import *
 
-import cv2
-import argparse
-
 class Runner(object):
 
     def __init__(self, model_file, options={}):
