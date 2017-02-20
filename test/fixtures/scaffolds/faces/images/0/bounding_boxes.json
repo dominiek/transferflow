@@ -1,7 +1,7 @@
 [
   {
-    "image_path": "images/00000000_640x480.png",
-    "rects": [
+    "image_path": "00000000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 152,
         "x2": 167,
@@ -71,8 +71,8 @@
     ]
   },
   {
-    "image_path": "images/00002000_640x480.png",
-    "rects": [
+    "image_path": "00002000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 155,
         "x2": 170,
@@ -136,8 +136,8 @@
     ]
   },
   {
-    "image_path": "images/00004000_640x480.png",
-    "rects": [
+    "image_path": "00004000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 181,
         "x2": 195,
@@ -207,8 +207,8 @@
     ]
   },
   {
-    "image_path": "images/00005000_640x480.png",
-    "rects": [
+    "image_path": "00005000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 222,
         "x2": 240,
@@ -272,8 +272,8 @@
     ]
   },
   {
-    "image_path": "images/00006000_640x480.png",
-    "rects": [
+    "image_path": "00006000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 463,
         "x2": 485,
@@ -355,8 +355,8 @@
     ]
   },
   {
-    "image_path": "images/00007000_640x480.png",
-    "rects": [
+    "image_path": "00007000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 384,
         "x2": 404,
@@ -438,8 +438,8 @@
     ]
   },
   {
-    "image_path": "images/00008000_640x480.png",
-    "rects": [
+    "image_path": "00008000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 233,
         "x2": 275,
@@ -515,8 +515,8 @@
     ]
   },
   {
-    "image_path": "images/00009000_640x480.png",
-    "rects": [
+    "image_path": "00009000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 175,
         "x2": 190,
@@ -574,8 +574,8 @@
     ]
   },
   {
-    "image_path": "images/00010000_640x480.png",
-    "rects": [
+    "image_path": "00010000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 182,
         "x2": 196,
@@ -639,8 +639,8 @@
     ]
   },
   {
-    "image_path": "images/00011000_640x480.png",
-    "rects": [
+    "image_path": "00011000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 376,
         "x2": 402,
@@ -686,8 +686,8 @@
     ]
   },
   {
-    "image_path": "images/00012000_640x480.png",
-    "rects": [
+    "image_path": "00012000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 471,
         "x2": 501,
@@ -751,8 +751,8 @@
     ]
   },
   {
-    "image_path": "images/00013000_640x480.png",
-    "rects": [
+    "image_path": "00013000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 177,
         "x2": 191,
@@ -810,8 +810,8 @@
     ]
   },
   {
-    "image_path": "images/00014000_640x480.png",
-    "rects": [
+    "image_path": "00014000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 177,
         "x2": 190,
@@ -869,8 +869,8 @@
     ]
   },
   {
-    "image_path": "images/00015000_640x480.png",
-    "rects": [
+    "image_path": "00015000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 176,
         "x2": 190,
@@ -928,8 +928,8 @@
     ]
   },
   {
-    "image_path": "images/00016000_640x480.png",
-    "rects": [
+    "image_path": "00016000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 281,
         "x2": 296,
@@ -969,8 +969,8 @@
     ]
   },
   {
-    "image_path": "images/00017000_640x480.png",
-    "rects": [
+    "image_path": "00017000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 400,
         "x2": 424,
@@ -1016,8 +1016,8 @@
     ]
   },
   {
-    "image_path": "images/00018000_640x480.png",
-    "rects": [
+    "image_path": "00018000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 158,
         "x2": 173,
@@ -1045,8 +1045,8 @@
     ]
   },
   {
-    "image_path": "images/00019000_640x480.png",
-    "rects": [
+    "image_path": "00019000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 520,
         "x2": 544,
@@ -1080,8 +1080,8 @@
     ]
   },
   {
-    "image_path": "images/00020000_640x480.png",
-    "rects": [
+    "image_path": "00020000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 402,
         "x2": 422,
@@ -1133,8 +1133,8 @@
     ]
   },
   {
-    "image_path": "images/00021000_640x480.png",
-    "rects": [
+    "image_path": "00021000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 441,
         "x2": 457,
@@ -1174,8 +1174,8 @@
     ]
   },
   {
-    "image_path": "images/00107000_640x480.png",
-    "rects": [
+    "image_path": "00107000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 385,
         "x2": 402,
@@ -1251,8 +1251,8 @@
     ]
   },
   {
-    "image_path": "images/00108000_640x480.png",
-    "rects": [
+    "image_path": "00108000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 462,
         "x2": 481,
@@ -1346,8 +1346,8 @@
     ]
   },
   {
-    "image_path": "images/00109000_640x480.png",
-    "rects": [
+    "image_path": "00109000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 166,
         "x2": 182,
@@ -1453,8 +1453,8 @@
     ]
   },
   {
-    "image_path": "images/00111000_640x480.png",
-    "rects": [
+    "image_path": "00111000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 367,
         "x2": 392,
@@ -1542,8 +1542,8 @@
     ]
   },
   {
-    "image_path": "images/00112000_640x480.png",
-    "rects": [
+    "image_path": "00112000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 166,
         "x2": 180,
@@ -1619,8 +1619,8 @@
     ]
   },
   {
-    "image_path": "images/00113000_640x480.png",
-    "rects": [
+    "image_path": "00113000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 168,
         "x2": 181,
@@ -1690,8 +1690,8 @@
     ]
   },
   {
-    "image_path": "images/00115000_640x480.png",
-    "rects": [
+    "image_path": "00115000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 164,
         "x2": 181,
@@ -1779,8 +1779,8 @@
     ]
   },
   {
-    "image_path": "images/00116000_640x480.png",
-    "rects": [
+    "image_path": "00116000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 171,
         "x2": 187,
@@ -1844,8 +1844,8 @@
     ]
   },
   {
-    "image_path": "images/00117000_640x480.png",
-    "rects": [
+    "image_path": "00117000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 464,
         "x2": 509,
@@ -1915,8 +1915,8 @@
     ]
   },
   {
-    "image_path": "images/00118000_640x480.png",
-    "rects": [
+    "image_path": "00118000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 438,
         "x2": 453,
@@ -1980,8 +1980,8 @@
     ]
   },
   {
-    "image_path": "images/00119000_640x480.png",
-    "rects": [
+    "image_path": "00119000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 455,
         "x2": 471,
@@ -2033,8 +2033,8 @@
     ]
   },
   {
-    "image_path": "images/00120000_640x480.png",
-    "rects": [
+    "image_path": "00120000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 464,
         "x2": 484,
@@ -2104,8 +2104,8 @@
     ]
   },
   {
-    "image_path": "images/00121000_640x480.png",
-    "rects": [
+    "image_path": "00121000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 461,
         "x2": 480,
@@ -2175,8 +2175,8 @@
     ]
   },
   {
-    "image_path": "images/00122000_640x480.png",
-    "rects": [
+    "image_path": "00122000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 469,
         "x2": 487,
@@ -2252,8 +2252,8 @@
     ]
   },
   {
-    "image_path": "images/00123000_640x480.png",
-    "rects": [
+    "image_path": "00123000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 424,
         "x2": 440,
@@ -2341,8 +2341,8 @@
     ]
   },
   {
-    "image_path": "images/00124000_640x480.png",
-    "rects": [
+    "image_path": "00124000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 433,
         "x2": 450,
@@ -2412,8 +2412,8 @@
     ]
   },
   {
-    "image_path": "images/00126000_640x480.png",
-    "rects": [
+    "image_path": "00126000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 382,
         "x2": 398,
@@ -2477,8 +2477,8 @@
     ]
   },
   {
-    "image_path": "images/00127000_640x480.png",
-    "rects": [
+    "image_path": "00127000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 97,
         "x2": 123,
@@ -2524,8 +2524,8 @@
     ]
   },
   {
-    "image_path": "images/00128000_640x480.png",
-    "rects": [
+    "image_path": "00128000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 279,
         "x2": 302,
@@ -2571,8 +2571,8 @@
     ]
   },
   {
-    "image_path": "images/00129000_640x480.png",
-    "rects": [
+    "image_path": "00129000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 473,
         "x2": 525,
@@ -2624,8 +2624,8 @@
     ]
   },
   {
-    "image_path": "images/00131000_640x480.png",
-    "rects": [
+    "image_path": "00131000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 140,
         "x2": 162,
@@ -2689,8 +2689,8 @@
     ]
   },
   {
-    "image_path": "images/00133000_640x480.png",
-    "rects": [
+    "image_path": "00133000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 105,
         "x2": 127,
@@ -2730,8 +2730,8 @@
     ]
   },
   {
-    "image_path": "images/00134000_640x480.png",
-    "rects": [
+    "image_path": "00134000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 460,
         "x2": 482,
@@ -2795,8 +2795,8 @@
     ]
   },
   {
-    "image_path": "images/00135000_640x480.png",
-    "rects": [
+    "image_path": "00135000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 208,
         "x2": 225,
@@ -2860,8 +2860,8 @@
     ]
   },
   {
-    "image_path": "images/00136000_640x480.png",
-    "rects": [
+    "image_path": "00136000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 103,
         "x2": 128,
@@ -2907,8 +2907,8 @@
     ]
   },
   {
-    "image_path": "images/00137000_640x480.png",
-    "rects": [
+    "image_path": "00137000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 474,
         "x2": 497,
@@ -2960,8 +2960,8 @@
     ]
   },
   {
-    "image_path": "images/00138000_640x480.png",
-    "rects": [
+    "image_path": "00138000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 219,
         "x2": 238,
@@ -3025,8 +3025,8 @@
     ]
   },
   {
-    "image_path": "images/00139000_640x480.png",
-    "rects": [
+    "image_path": "00139000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 200,
         "x2": 221,
@@ -3078,8 +3078,8 @@
     ]
   },
   {
-    "image_path": "images/00140000_640x480.png",
-    "rects": [
+    "image_path": "00140000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 217,
         "x2": 235,
@@ -3143,8 +3143,8 @@
     ]
   },
   {
-    "image_path": "images/00141000_640x480.png",
-    "rects": [
+    "image_path": "00141000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 225,
         "x2": 242,
@@ -3202,8 +3202,8 @@
     ]
   },
   {
-    "image_path": "images/00142000_640x480.png",
-    "rects": [
+    "image_path": "00142000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 463,
         "x2": 482,
@@ -3243,8 +3243,8 @@
     ]
   },
   {
-    "image_path": "images/00143000_640x480.png",
-    "rects": [
+    "image_path": "00143000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 376,
         "x2": 399,
@@ -3278,8 +3278,8 @@
     ]
   },
   {
-    "image_path": "images/00144000_640x480.png",
-    "rects": [
+    "image_path": "00144000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 210,
         "x2": 232,
@@ -3325,8 +3325,8 @@
     ]
   },
   {
-    "image_path": "images/00145000_640x480.png",
-    "rects": [
+    "image_path": "00145000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 223,
         "x2": 240,
@@ -3366,8 +3366,8 @@
     ]
   },
   {
-    "image_path": "images/00146000_640x480.png",
-    "rects": [
+    "image_path": "00146000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 478,
         "x2": 498,
@@ -3395,8 +3395,8 @@
     ]
   },
   {
-    "image_path": "images/00147000_640x480.png",
-    "rects": [
+    "image_path": "00147000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 173,
         "x2": 196,
@@ -3436,8 +3436,8 @@
     ]
   },
   {
-    "image_path": "images/00148000_640x480.png",
-    "rects": [
+    "image_path": "00148000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 395,
         "x2": 411,
@@ -3465,8 +3465,8 @@
     ]
   },
   {
-    "image_path": "images/00149000_640x480.png",
-    "rects": [
+    "image_path": "00149000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 172,
         "x2": 197,
@@ -3512,8 +3512,8 @@
     ]
   },
   {
-    "image_path": "images/00150000_640x480.png",
-    "rects": [
+    "image_path": "00150000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 241,
         "x2": 287,
@@ -3529,8 +3529,8 @@
     ]
   },
   {
-    "image_path": "images/00151000_640x480.png",
-    "rects": [
+    "image_path": "00151000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 162,
         "x2": 183,
@@ -3564,8 +3564,8 @@
     ]
   },
   {
-    "image_path": "images/00152000_640x480.png",
-    "rects": [
+    "image_path": "00152000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 321,
         "x2": 351,
@@ -3575,8 +3575,8 @@
     ]
   },
   {
-    "image_path": "images/00153000_640x480.png",
-    "rects": [
+    "image_path": "00153000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 389,
         "x2": 407,
@@ -3592,8 +3592,8 @@
     ]
   },
   {
-    "image_path": "images/00154000_640x480.png",
-    "rects": [
+    "image_path": "00154000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 383,
         "x2": 404,
@@ -3603,8 +3603,8 @@
     ]
   },
   {
-    "image_path": "images/00156000_640x480.png",
-    "rects": [
+    "image_path": "00156000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 488,
         "x2": 508,
@@ -3614,8 +3614,8 @@
     ]
   },
   {
-    "image_path": "images/00157000_640x480.png",
-    "rects": [
+    "image_path": "00157000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 167,
         "x2": 237,
@@ -3625,12 +3625,12 @@
     ]
   },
   {
-    "image_path": "images/00158000_640x480.png",
-    "rects": []
+    "image_path": "00158000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00160000_640x480.png",
-    "rects": [
+    "image_path": "00160000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 459,
         "x2": 494,
@@ -3640,16 +3640,16 @@
     ]
   },
   {
-    "image_path": "images/00161000_640x480.png",
-    "rects": []
+    "image_path": "00161000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00162000_640x480.png",
-    "rects": []
+    "image_path": "00162000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00163000_640x480.png",
-    "rects": [
+    "image_path": "00163000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 514,
         "x2": 534,
@@ -3659,16 +3659,16 @@
     ]
   },
   {
-    "image_path": "images/00164000_640x480.png",
-    "rects": []
+    "image_path": "00164000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00165000_640x480.png",
-    "rects": []
+    "image_path": "00165000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00166000_640x480.png",
-    "rects": [
+    "image_path": "00166000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 537,
         "x2": 564,
@@ -3678,52 +3678,52 @@
     ]
   },
   {
-    "image_path": "images/00167000_640x480.png",
-    "rects": []
+    "image_path": "00167000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00298000_640x480.png",
-    "rects": []
+    "image_path": "00298000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00299000_640x480.png",
-    "rects": []
+    "image_path": "00299000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00300000_640x480.png",
-    "rects": []
+    "image_path": "00300000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00301000_640x480.png",
-    "rects": []
+    "image_path": "00301000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00302000_640x480.png",
-    "rects": []
+    "image_path": "00302000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00303000_640x480.png",
-    "rects": []
+    "image_path": "00303000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00304000_640x480.png",
-    "rects": []
+    "image_path": "00304000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00305000_640x480.png",
-    "rects": []
+    "image_path": "00305000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00306000_640x480.png",
-    "rects": []
+    "image_path": "00306000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00307000_640x480.png",
-    "rects": []
+    "image_path": "00307000_640x480.png",
+    "bounding_boxes": []
   },
   {
-    "image_path": "images/00308000_640x480.png",
-    "rects": [
+    "image_path": "00308000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 437,
         "x2": 451,
@@ -3733,8 +3733,8 @@
     ]
   },
   {
-    "image_path": "images/00309000_640x480.png",
-    "rects": [
+    "image_path": "00309000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 263,
         "x2": 294,
@@ -3762,8 +3762,8 @@
     ]
   },
   {
-    "image_path": "images/00310000_640x480.png",
-    "rects": [
+    "image_path": "00310000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 347,
         "x2": 372,
@@ -3779,8 +3779,8 @@
     ]
   },
   {
-    "image_path": "images/00311000_640x480.png",
-    "rects": [
+    "image_path": "00311000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 406,
         "x2": 424,
@@ -3802,8 +3802,8 @@
     ]
   },
   {
-    "image_path": "images/00312000_640x480.png",
-    "rects": [
+    "image_path": "00312000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 304,
         "x2": 323,
@@ -3825,8 +3825,8 @@
     ]
   },
   {
-    "image_path": "images/00313000_640x480.png",
-    "rects": [
+    "image_path": "00313000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 261,
         "x2": 304,
@@ -3860,8 +3860,8 @@
     ]
   },
   {
-    "image_path": "images/00314000_640x480.png",
-    "rects": [
+    "image_path": "00314000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 209,
         "x2": 234,
@@ -3889,8 +3889,8 @@
     ]
   },
   {
-    "image_path": "images/00315000_640x480.png",
-    "rects": [
+    "image_path": "00315000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 400,
         "x2": 415,
@@ -3918,8 +3918,8 @@
     ]
   },
   {
-    "image_path": "images/00316000_640x480.png",
-    "rects": [
+    "image_path": "00316000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 291,
         "x2": 313,
@@ -3947,8 +3947,8 @@
     ]
   },
   {
-    "image_path": "images/00317000_640x480.png",
-    "rects": [
+    "image_path": "00317000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 509,
         "x2": 530,
@@ -3976,8 +3976,8 @@
     ]
   },
   {
-    "image_path": "images/00319000_640x480.png",
-    "rects": [
+    "image_path": "00319000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 180,
         "x2": 195,
@@ -3999,8 +3999,8 @@
     ]
   },
   {
-    "image_path": "images/00321000_640x480.png",
-    "rects": [
+    "image_path": "00321000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 464,
         "x2": 479,
@@ -4022,8 +4022,8 @@
     ]
   },
   {
-    "image_path": "images/00323000_640x480.png",
-    "rects": [
+    "image_path": "00323000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 177,
         "x2": 191,
@@ -4051,8 +4051,8 @@
     ]
   },
   {
-    "image_path": "images/00324000_640x480.png",
-    "rects": [
+    "image_path": "00324000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 180,
         "x2": 193,
@@ -4098,8 +4098,8 @@
     ]
   },
   {
-    "image_path": "images/00326000_640x480.png",
-    "rects": [
+    "image_path": "00326000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 147,
         "x2": 166,
@@ -4115,8 +4115,8 @@
     ]
   },
   {
-    "image_path": "images/00327000_640x480.png",
-    "rects": [
+    "image_path": "00327000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 246,
         "x2": 277,
@@ -4144,8 +4144,8 @@
     ]
   },
   {
-    "image_path": "images/00328000_640x480.png",
-    "rects": [
+    "image_path": "00328000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 186,
         "x2": 216,
@@ -4173,8 +4173,8 @@
     ]
   },
   {
-    "image_path": "images/00329000_640x480.png",
-    "rects": [
+    "image_path": "00329000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 179,
         "x2": 200,
@@ -4190,8 +4190,8 @@
     ]
   },
   {
-    "image_path": "images/00330000_640x480.png",
-    "rects": [
+    "image_path": "00330000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 476,
         "x2": 514,
@@ -4219,8 +4219,8 @@
     ]
   },
   {
-    "image_path": "images/00331000_640x480.png",
-    "rects": [
+    "image_path": "00331000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 425,
         "x2": 438,
@@ -4254,8 +4254,8 @@
     ]
   },
   {
-    "image_path": "images/00332000_640x480.png",
-    "rects": [
+    "image_path": "00332000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 85,
         "x2": 109,
@@ -4283,8 +4283,8 @@
     ]
   },
   {
-    "image_path": "images/00333000_640x480.png",
-    "rects": [
+    "image_path": "00333000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 514,
         "x2": 540,
@@ -4312,8 +4312,8 @@
     ]
   },
   {
-    "image_path": "images/00334000_640x480.png",
-    "rects": [
+    "image_path": "00334000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 244,
         "x2": 275,
@@ -4347,8 +4347,8 @@
     ]
   },
   {
-    "image_path": "images/00335000_640x480.png",
-    "rects": [
+    "image_path": "00335000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 363,
         "x2": 384,
@@ -4406,8 +4406,8 @@
     ]
   },
   {
-    "image_path": "images/00336000_640x480.png",
-    "rects": [
+    "image_path": "00336000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 513,
         "x2": 539,
@@ -4453,8 +4453,8 @@
     ]
   },
   {
-    "image_path": "images/00337000_640x480.png",
-    "rects": [
+    "image_path": "00337000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 174,
         "x2": 186,
@@ -4500,8 +4500,8 @@
     ]
   },
   {
-    "image_path": "images/00338000_640x480.png",
-    "rects": [
+    "image_path": "00338000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 344,
         "x2": 382,
@@ -4565,8 +4565,8 @@
     ]
   },
   {
-    "image_path": "images/00339000_640x480.png",
-    "rects": [
+    "image_path": "00339000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 176,
         "x2": 190,
@@ -4594,8 +4594,8 @@
     ]
   },
   {
-    "image_path": "images/00340000_640x480.png",
-    "rects": [
+    "image_path": "00340000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 176,
         "x2": 192,
@@ -4623,8 +4623,8 @@
     ]
   },
   {
-    "image_path": "images/00341000_640x480.png",
-    "rects": [
+    "image_path": "00341000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 310,
         "x2": 328,
@@ -4640,8 +4640,8 @@
     ]
   },
   {
-    "image_path": "images/00342000_640x480.png",
-    "rects": [
+    "image_path": "00342000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 327,
         "x2": 358,
@@ -4651,8 +4651,8 @@
     ]
   },
   {
-    "image_path": "images/00343000_640x480.png",
-    "rects": [
+    "image_path": "00343000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 390,
         "x2": 406,
@@ -4680,8 +4680,8 @@
     ]
   },
   {
-    "image_path": "images/00344000_640x480.png",
-    "rects": [
+    "image_path": "00344000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 190,
         "x2": 224,
@@ -4709,8 +4709,8 @@
     ]
   },
   {
-    "image_path": "images/00346000_640x480.png",
-    "rects": [
+    "image_path": "00346000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 149,
         "x2": 167,
@@ -4762,8 +4762,8 @@
     ]
   },
   {
-    "image_path": "images/00347000_640x480.png",
-    "rects": [
+    "image_path": "00347000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 79,
         "x2": 97,
@@ -4827,8 +4827,8 @@
     ]
   },
   {
-    "image_path": "images/00348000_640x480.png",
-    "rects": [
+    "image_path": "00348000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 146,
         "x2": 164,
@@ -4892,8 +4892,8 @@
     ]
   },
   {
-    "image_path": "images/00349000_640x480.png",
-    "rects": [
+    "image_path": "00349000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 247,
         "x2": 277,
@@ -4945,8 +4945,8 @@
     ]
   },
   {
-    "image_path": "images/00350000_640x480.png",
-    "rects": [
+    "image_path": "00350000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 148,
         "x2": 164,
@@ -4998,8 +4998,8 @@
     ]
   },
   {
-    "image_path": "images/00352000_640x480.png",
-    "rects": [
+    "image_path": "00352000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 172,
         "x2": 187,
@@ -5051,8 +5051,8 @@
     ]
   },
   {
-    "image_path": "images/00353000_640x480.png",
-    "rects": [
+    "image_path": "00353000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 195,
         "x2": 223,
@@ -5068,8 +5068,8 @@
     ]
   },
   {
-    "image_path": "images/00354000_640x480.png",
-    "rects": [
+    "image_path": "00354000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 385,
         "x2": 405,
@@ -5109,8 +5109,8 @@
     ]
   },
   {
-    "image_path": "images/00355000_640x480.png",
-    "rects": [
+    "image_path": "00355000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 133,
         "x2": 153,
@@ -5162,8 +5162,8 @@
     ]
   },
   {
-    "image_path": "images/00357000_640x480.png",
-    "rects": [
+    "image_path": "00357000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 178,
         "x2": 191,
@@ -5185,8 +5185,8 @@
     ]
   },
   {
-    "image_path": "images/00358000_640x480.png",
-    "rects": [
+    "image_path": "00358000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 174,
         "x2": 189,
@@ -5220,8 +5220,8 @@
     ]
   },
   {
-    "image_path": "images/00359000_640x480.png",
-    "rects": [
+    "image_path": "00359000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 306,
         "x2": 330,
@@ -5243,8 +5243,8 @@
     ]
   },
   {
-    "image_path": "images/00360000_640x480.png",
-    "rects": [
+    "image_path": "00360000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 89,
         "x2": 131,
@@ -5302,8 +5302,8 @@
     ]
   },
   {
-    "image_path": "images/00363000_640x480.png",
-    "rects": [
+    "image_path": "00363000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 354,
         "x2": 382,
@@ -5361,8 +5361,8 @@
     ]
   },
   {
-    "image_path": "images/00364000_640x480.png",
-    "rects": [
+    "image_path": "00364000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 516,
         "x2": 545,
@@ -5420,8 +5420,8 @@
     ]
   },
   {
-    "image_path": "images/00365000_640x480.png",
-    "rects": [
+    "image_path": "00365000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 180,
         "x2": 194,
@@ -5479,8 +5479,8 @@
     ]
   },
   {
-    "image_path": "images/00366000_640x480.png",
-    "rects": [
+    "image_path": "00366000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 478,
         "x2": 508,
@@ -5526,8 +5526,8 @@
     ]
   },
   {
-    "image_path": "images/00367000_640x480.png",
-    "rects": [
+    "image_path": "00367000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 461,
         "x2": 491,
@@ -5573,8 +5573,8 @@
     ]
   },
   {
-    "image_path": "images/00368000_640x480.png",
-    "rects": [
+    "image_path": "00368000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 180,
         "x2": 194,
@@ -5620,8 +5620,8 @@
     ]
   },
   {
-    "image_path": "images/00369000_640x480.png",
-    "rects": [
+    "image_path": "00369000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 373,
         "x2": 397,
@@ -5667,8 +5667,8 @@
     ]
   },
   {
-    "image_path": "images/00370000_640x480.png",
-    "rects": [
+    "image_path": "00370000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 322,
         "x2": 338,
@@ -5714,8 +5714,8 @@
     ]
   },
   {
-    "image_path": "images/00371000_640x480.png",
-    "rects": [
+    "image_path": "00371000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 181,
         "x2": 196,
@@ -5779,8 +5779,8 @@
     ]
   },
   {
-    "image_path": "images/00372000_640x480.png",
-    "rects": [
+    "image_path": "00372000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 177,
         "x2": 193,
@@ -5856,8 +5856,8 @@
     ]
   },
   {
-    "image_path": "images/00373000_640x480.png",
-    "rects": [
+    "image_path": "00373000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 155,
         "x2": 172,
@@ -5897,8 +5897,8 @@
     ]
   },
   {
-    "image_path": "images/00374000_640x480.png",
-    "rects": [
+    "image_path": "00374000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 156,
         "x2": 173,
@@ -5950,8 +5950,8 @@
     ]
   },
   {
-    "image_path": "images/00375000_640x480.png",
-    "rects": [
+    "image_path": "00375000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 178,
         "x2": 193,
@@ -5991,8 +5991,8 @@
     ]
   },
   {
-    "image_path": "images/00376000_640x480.png",
-    "rects": [
+    "image_path": "00376000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 186,
         "x2": 202,
@@ -6032,8 +6032,8 @@
     ]
   },
   {
-    "image_path": "images/00377000_640x480.png",
-    "rects": [
+    "image_path": "00377000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 178,
         "x2": 193,
@@ -6079,8 +6079,8 @@
     ]
   },
   {
-    "image_path": "images/00378000_640x480.png",
-    "rects": [
+    "image_path": "00378000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 469,
         "x2": 501,
@@ -6120,8 +6120,8 @@
     ]
   },
   {
-    "image_path": "images/00379000_640x480.png",
-    "rects": [
+    "image_path": "00379000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 451,
         "x2": 486,
@@ -6173,8 +6173,8 @@
     ]
   },
   {
-    "image_path": "images/00380000_640x480.png",
-    "rects": [
+    "image_path": "00380000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 520,
         "x2": 545,
@@ -6220,8 +6220,8 @@
     ]
   },
   {
-    "image_path": "images/00382000_640x480.png",
-    "rects": [
+    "image_path": "00382000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 163,
         "x2": 182,
@@ -6267,8 +6267,8 @@
     ]
   },
   {
-    "image_path": "images/00383000_640x480.png",
-    "rects": [
+    "image_path": "00383000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 329,
         "x2": 343,
@@ -6302,8 +6302,8 @@
     ]
   },
   {
-    "image_path": "images/00384000_640x480.png",
-    "rects": [
+    "image_path": "00384000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 376,
         "x2": 393,
@@ -6343,8 +6343,8 @@
     ]
   },
   {
-    "image_path": "images/00385000_640x480.png",
-    "rects": [
+    "image_path": "00385000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 157,
         "x2": 175,
@@ -6378,8 +6378,8 @@
     ]
   },
   {
-    "image_path": "images/00386000_640x480.png",
-    "rects": [
+    "image_path": "00386000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 169,
         "x2": 182,
@@ -6425,8 +6425,8 @@
     ]
   },
   {
-    "image_path": "images/00387000_640x480.png",
-    "rects": [
+    "image_path": "00387000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 162,
         "x2": 177,
@@ -6460,8 +6460,8 @@
     ]
   },
   {
-    "image_path": "images/00388000_640x480.png",
-    "rects": [
+    "image_path": "00388000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 495,
         "x2": 515,
@@ -6501,8 +6501,8 @@
     ]
   },
   {
-    "image_path": "images/00389000_640x480.png",
-    "rects": [
+    "image_path": "00389000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 469,
         "x2": 499,
@@ -6548,8 +6548,8 @@
     ]
   },
   {
-    "image_path": "images/00390000_640x480.png",
-    "rects": [
+    "image_path": "00390000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 157,
         "x2": 175,
@@ -6601,8 +6601,8 @@
     ]
   },
   {
-    "image_path": "images/00391000_640x480.png",
-    "rects": [
+    "image_path": "00391000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 463,
         "x2": 478,
@@ -6636,8 +6636,8 @@
     ]
   },
   {
-    "image_path": "images/00392000_640x480.png",
-    "rects": [
+    "image_path": "00392000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 236,
         "x2": 256,
@@ -6683,8 +6683,8 @@
     ]
   },
   {
-    "image_path": "images/00393000_640x480.png",
-    "rects": [
+    "image_path": "00393000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 508,
         "x2": 525,
@@ -6718,8 +6718,8 @@
     ]
   },
   {
-    "image_path": "images/00394000_640x480.png",
-    "rects": [
+    "image_path": "00394000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 232,
         "x2": 257,
@@ -6753,8 +6753,8 @@
     ]
   },
   {
-    "image_path": "images/00395000_640x480.png",
-    "rects": [
+    "image_path": "00395000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 182,
         "x2": 195,
@@ -6800,8 +6800,8 @@
     ]
   },
   {
-    "image_path": "images/00396000_640x480.png",
-    "rects": [
+    "image_path": "00396000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 466,
         "x2": 497,
@@ -6835,8 +6835,8 @@
     ]
   },
   {
-    "image_path": "images/00397000_640x480.png",
-    "rects": [
+    "image_path": "00397000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 324,
         "x2": 340,
@@ -6870,8 +6870,8 @@
     ]
   },
   {
-    "image_path": "images/00398000_640x480.png",
-    "rects": [
+    "image_path": "00398000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 148,
         "x2": 176,
@@ -6917,8 +6917,8 @@
     ]
   },
   {
-    "image_path": "images/00399000_640x480.png",
-    "rects": [
+    "image_path": "00399000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 135,
         "x2": 169,
@@ -6964,8 +6964,8 @@
     ]
   },
   {
-    "image_path": "images/00400000_640x480.png",
-    "rects": [
+    "image_path": "00400000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 148,
         "x2": 167,
@@ -6999,8 +6999,8 @@
     ]
   },
   {
-    "image_path": "images/00401000_640x480.png",
-    "rects": [
+    "image_path": "00401000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 150,
         "x2": 165,
@@ -7040,8 +7040,8 @@
     ]
   },
   {
-    "image_path": "images/00402000_640x480.png",
-    "rects": [
+    "image_path": "00402000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 146,
         "x2": 163,
@@ -7099,8 +7099,8 @@
     ]
   },
   {
-    "image_path": "images/00403000_640x480.png",
-    "rects": [
+    "image_path": "00403000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 176,
         "x2": 192,
@@ -7146,8 +7146,8 @@
     ]
   },
   {
-    "image_path": "images/00404000_640x480.png",
-    "rects": [
+    "image_path": "00404000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 284,
         "x2": 303,
@@ -7193,8 +7193,8 @@
     ]
   },
   {
-    "image_path": "images/00405000_640x480.png",
-    "rects": [
+    "image_path": "00405000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 324,
         "x2": 342,
@@ -7246,8 +7246,8 @@
     ]
   },
   {
-    "image_path": "images/00406000_640x480.png",
-    "rects": [
+    "image_path": "00406000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 313,
         "x2": 329,
@@ -7305,8 +7305,8 @@
     ]
   },
   {
-    "image_path": "images/00407000_640x480.png",
-    "rects": [
+    "image_path": "00407000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 188,
         "x2": 200,
@@ -7382,8 +7382,8 @@
     ]
   },
   {
-    "image_path": "images/00408000_640x480.png",
-    "rects": [
+    "image_path": "00408000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 106,
         "x2": 169,
@@ -7483,8 +7483,8 @@
     ]
   },
   {
-    "image_path": "images/00409000_640x480.png",
-    "rects": [
+    "image_path": "00409000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 118,
         "x2": 148,
@@ -7554,8 +7554,8 @@
     ]
   },
   {
-    "image_path": "images/00410000_640x480.png",
-    "rects": [
+    "image_path": "00410000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 177,
         "x2": 190,
@@ -7649,8 +7649,8 @@
     ]
   },
   {
-    "image_path": "images/00411000_640x480.png",
-    "rects": [
+    "image_path": "00411000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 179,
         "x2": 193,
@@ -7738,8 +7738,8 @@
     ]
   },
   {
-    "image_path": "images/00412000_640x480.png",
-    "rects": [
+    "image_path": "00412000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 331,
         "x2": 343,
@@ -7803,8 +7803,8 @@
     ]
   },
   {
-    "image_path": "images/00413000_640x480.png",
-    "rects": [
+    "image_path": "00413000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 90,
         "x2": 106,
@@ -7898,8 +7898,8 @@
     ]
   },
   {
-    "image_path": "images/00414000_640x480.png",
-    "rects": [
+    "image_path": "00414000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 183,
         "x2": 197,
@@ -7999,8 +7999,8 @@
     ]
   },
   {
-    "image_path": "images/00415000_640x480.png",
-    "rects": [
+    "image_path": "00415000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 180,
         "x2": 195,
@@ -8106,8 +8106,8 @@
     ]
   },
   {
-    "image_path": "images/00416000_640x480.png",
-    "rects": [
+    "image_path": "00416000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 183,
         "x2": 199,
@@ -8177,8 +8177,8 @@
     ]
   },
   {
-    "image_path": "images/00417000_640x480.png",
-    "rects": [
+    "image_path": "00417000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 137,
         "x2": 155,
@@ -8248,8 +8248,8 @@
     ]
   },
   {
-    "image_path": "images/00418000_640x480.png",
-    "rects": [
+    "image_path": "00418000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 135,
         "x2": 154,
@@ -8301,8 +8301,8 @@
     ]
   },
   {
-    "image_path": "images/00419000_640x480.png",
-    "rects": [
+    "image_path": "00419000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 459,
         "x2": 495,
@@ -8378,8 +8378,8 @@
     ]
   },
   {
-    "image_path": "images/00422000_640x480.png",
-    "rects": [
+    "image_path": "00422000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 112,
         "x2": 131,
@@ -8437,8 +8437,8 @@
     ]
   },
   {
-    "image_path": "images/00423000_640x480.png",
-    "rects": [
+    "image_path": "00423000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 498,
         "x2": 537,
@@ -8490,8 +8490,8 @@
     ]
   },
   {
-    "image_path": "images/00424000_640x480.png",
-    "rects": [
+    "image_path": "00424000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 97,
         "x2": 130,
@@ -8543,8 +8543,8 @@
     ]
   },
   {
-    "image_path": "images/00425000_640x480.png",
-    "rects": [
+    "image_path": "00425000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 313,
         "x2": 328,
@@ -8590,8 +8590,8 @@
     ]
   },
   {
-    "image_path": "images/00426000_640x480.png",
-    "rects": [
+    "image_path": "00426000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 233,
         "x2": 262,
@@ -8637,8 +8637,8 @@
     ]
   },
   {
-    "image_path": "images/00427000_640x480.png",
-    "rects": [
+    "image_path": "00427000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 233,
         "x2": 249,
@@ -8690,8 +8690,8 @@
     ]
   },
   {
-    "image_path": "images/00428000_640x480.png",
-    "rects": [
+    "image_path": "00428000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 232,
         "x2": 248,
@@ -8743,8 +8743,8 @@
     ]
   },
   {
-    "image_path": "images/00429000_640x480.png",
-    "rects": [
+    "image_path": "00429000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 174,
         "x2": 187,
@@ -8808,8 +8808,8 @@
     ]
   },
   {
-    "image_path": "images/00430000_640x480.png",
-    "rects": [
+    "image_path": "00430000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 174,
         "x2": 188,
@@ -8861,8 +8861,8 @@
     ]
   },
   {
-    "image_path": "images/00431000_640x480.png",
-    "rects": [
+    "image_path": "00431000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 173,
         "x2": 187,
@@ -8914,8 +8914,8 @@
     ]
   },
   {
-    "image_path": "images/00432000_640x480.png",
-    "rects": [
+    "image_path": "00432000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 174,
         "x2": 188,
@@ -8985,8 +8985,8 @@
     ]
   },
   {
-    "image_path": "images/00433000_640x480.png",
-    "rects": [
+    "image_path": "00433000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 231,
         "x2": 248,
@@ -9014,8 +9014,8 @@
     ]
   },
   {
-    "image_path": "images/00434000_640x480.png",
-    "rects": [
+    "image_path": "00434000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 269,
         "x2": 302,
@@ -9055,8 +9055,8 @@
     ]
   },
   {
-    "image_path": "images/00435000_640x480.png",
-    "rects": [
+    "image_path": "00435000_640x480.png",
+    "bounding_boxes": [
       {
         "x1": 356,
         "x2": 384,

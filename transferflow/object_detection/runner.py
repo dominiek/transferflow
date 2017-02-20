@@ -7,6 +7,7 @@ from scipy.misc import imread, imresize
 from utils.train_utils import calculate_rectangles, rescale_boxes
 from . import DEFAULT_SETTINGS
 from transferflow.utils import *
+from transferflow.models import load_model_state
 
 class Runner(object):
 
@@ -22,7 +23,7 @@ class Runner(object):
         tf.reset_default_graph()
         self.sess = tf.Session()
         self.sess.run(tf.initialize_all_variables())
-        load_model(self.sess, model_file)
+        load_model_state(self.sess, model_file)
 
         self.pred_boxes = self.sess.graph.get_tensor_by_name('decoder_2/pred_boxes_test:0')
         self.pred_confidences = self.sess.graph.get_tensor_by_name('decoder_2/pred_confidences_test:0')

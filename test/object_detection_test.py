@@ -10,6 +10,7 @@ from scipy import misc
 from transferflow.object_detection.trainer import Trainer
 from transferflow.object_detection.runner import Runner
 from transferflow.utils import *
+from transferflow.models import validate_model
 import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)
@@ -33,6 +34,7 @@ class ObjectDetectionTest(unittest.TestCase):
         trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', num_steps=1000)
         trainer.prepare()
         benchmark_info = trainer.train(test_dir + '/fixtures/tmp/faces_test')
+        validate_model(test_dir + '/fixtures/tmp/faces_test')
         self.assertEqual(benchmark_info['test_accuracy'] >= 0.80, True)
 
     def test_3_run_faces(self):

@@ -30,15 +30,19 @@ def create_annotation_list(images):
         anno.imageName = annotation["image_path"]
 
         rects = []
-        for annoRect in annotation["rects"]:
+        for bounding_box in annotation["bounding_boxes"]:
+            bb_type = bounding_box.get('type', 'rect')
+            if bb_type != 'rect':
+                raise Exception('Unsupported bounding_box type: {}'.format(bb_type))
             rect = AnnoRect()
 
-            rect.x1 = annoRect["x1"]
-            rect.x2 = annoRect["x2"]
-            rect.y1 = annoRect["y1"]
-            rect.y2 = annoRect["y2"]
-            if "score" in annoRect:
-                rect.score = annoRect["score"]
+            rect.x1 = bounding_box["x1"]
+            rect.x2 = bounding_box["x2"]
+            rect.y1 = bounding_box["y1"]
+            rect.y2 = bounding_box["y2"]
+            
+            if "score" in bounding_box:
+                rect.score = bounding_box["score"]
 
             rects.append(rect)
 

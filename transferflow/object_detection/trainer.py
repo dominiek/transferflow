@@ -8,6 +8,8 @@ import tensorflow as tf
 import numpy as np
 from . import DEFAULT_SETTINGS
 from transferflow.utils import *
+from transferflow.models import create_empty_model, transfer_model_meta, save_model_state, save_model_benchmark_info
+from transferflow.scaffolds import bounding_boxes_for_scaffold
 from tensorbox import *
 
 import logging
@@ -140,14 +142,15 @@ class Trainer(object):
 
             for thread in threads:
                 thread.stop_event.set()
-            save_model(sess, output_model_path)
+
+            create_empty_model(output_model_path)
+            transfer_model_meta(self.scaffold_path, output_model_path)
+            save_model_state(sess, output_model_path)
 
             benchmark_info = {
                 'adjusted_lr': float(adjusted_lr),
                 'train_loss': float(train_loss),
                 'test_accuracy': float(test_accuracy)
             }
+            save_model_benchmark_info(output_model_path, benchmark_info)
             return benchmark_info
-
-    def purge_cache(self):
-        pass

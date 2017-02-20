@@ -14,7 +14,7 @@ class Runner(object):
         tf.reset_default_graph()
         self.sess = tf.Session()
         self.namespace = namespace
-        with tf.gfile.FastGFile(os.path.join(model_file, 'model.pb'), 'rb') as f:
+        with tf.gfile.FastGFile(os.path.join(model_file, 'state/model.pb'), 'rb') as f:
             graph_def = tf.GraphDef()
             graph_def.ParseFromString(f.read())
             _ = tf.import_graph_def(graph_def, name=namespace)

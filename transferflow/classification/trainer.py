@@ -9,6 +9,7 @@ import tensorflow as tf
 from tensorflow.python.framework import graph_util
 from tensorflow.python.platform import gfile
 from inception import *
+from transferflow.models import create_empty_model, transfer_model_meta, save_model_benchmark_info
 
 import logging
 logger = logging.getLogger("transferflow.classification")
@@ -31,7 +32,9 @@ class Trainer(object):
         self.bottleneck_tensor, self.jpeg_data_tensor, self.resized_image_tensor = load_base_graph(sess, settings['base_graph_path'])
 
         image_dir = self.scaffold_path + '/images'
-        bottleneck_dir = self.scaffold_path + '/bottlenecks'
+        if not os.path.isdir(self.scaffold_path + '/cache'):
+            os.mkdir(self.scaffold_path + '/cache')
+        bottleneck_dir = self.scaffold_path + '/cache/bottlenecks'
 
         self.image_lists = create_image_lists(image_dir, settings['testing_percentage'], settings['validation_percentage'])
         class_count = len(self.image_lists.keys())
@@ -123,10 +126,9 @@ class Trainer(object):
             'cross_entropy_value': float(cross_entropy_value)
         }
 
-        if os.path.isdir(output_model_path):
-            shutil.rmtree(output_model_path)
-        os.mkdir(output_model_path)
-        output_graph_path = output_model_path + '/model.pb'
+        create_empty_model(output_model_path)
+        transfer_model_meta(self.scaffold_path, output_model_path)
+        output_graph_path = output_model_path + '/state/model.pb'
 
         # Write out the trained graph and labels with the weights stored as constants.
         output_graph_def = graph_util.convert_variables_to_constants(
@@ -139,6 +141,3 @@ class Trainer(object):
         sess.close()
 
         return benchmark_info
-
-    def purge_cache(self):
-        shutil.rmtree(self.scaffold_path + '/bottlenecks')

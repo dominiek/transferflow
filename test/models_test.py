@@ -6,6 +6,7 @@ import time
 test_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(test_dir + '/../')
 import tensorflow as tf
+from transferflow.models import *
 from transferflow.utils import *
 import logging
 logger = logging.getLogger("transferflow")
@@ -20,12 +21,17 @@ def create_graph():
     tf.Variable(99, name='unused')
     return state, update, increment
 
-class UtilsTest(unittest.TestCase):
+class ModelsTest(unittest.TestCase):
 
     def setUp(self):
         pass
 
-    def test_save_and_load_model_without_meta(self):
+    def test_validate(self):
+        #validate_model(test_dir + '/fixtures/models/faces_test')
+        with self.assertRaises(InvalidModelError):
+            validate_model(test_dir)
+
+    def test_save_and_load_model_state_without_meta(self):
         tf.reset_default_graph()
         # Create TF graph
         state, update, increment = create_graph()
@@ -44,7 +50,7 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(len(get_tensors(session)), 15)
 
         # Save state
-        save_model(session, test_dir + '/fixtures/tmp/increment_without_meta')
+        save_model_state(session, test_dir + '/fixtures/tmp/increment_without_meta')
 
         # Clear graph
         tf.reset_default_graph()
@@ -56,7 +62,7 @@ class UtilsTest(unittest.TestCase):
         state, update, increment = create_graph()
         init = tf.global_variables_initializer()
         session.run(init)
-        load_model(session, test_dir + '/fixtures/tmp/increment_without_meta', exclude_meta=True)
+        load_model_state(session, test_dir + '/fixtures/tmp/increment_without_meta', exclude_meta=True)
 
 
         # Assert previous state
@@ -64,7 +70,7 @@ class UtilsTest(unittest.TestCase):
         session.run(update, {increment: 3})
         self.assertEqual(session.run(state), 6)
 
-    def test_save_and_load_model_with_meta(self):
+    def test_save_and_load_model_state_with_meta(self):
         tf.reset_default_graph()
         # Create TF graph
         create_graph()
@@ -83,7 +89,7 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(len(get_tensors(session)), 15)
 
         # Save state
-        save_model(session, test_dir + '/fixtures/tmp/increment')
+        save_model_state(session, test_dir + '/fixtures/tmp/increment')
 
         # Clear graph
         tf.reset_default_graph()
@@ -91,7 +97,7 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(len(get_tensors(session)), 0)
 
         # Restore model fully from file
-        load_model(session, test_dir + '/fixtures/tmp/increment')
+        load_model_state(session, test_dir + '/fixtures/tmp/increment')
 
         # Assert previous state
         self.assertEqual(session.run('state:0'), 3)

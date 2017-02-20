@@ -10,6 +10,8 @@ from scipy import misc
 from transferflow.classification.trainer import Trainer
 from transferflow.classification.runner import Runner
 from transferflow.utils import *
+from transferflow.models import validate_model
+from transferflow.scaffolds import clear_scaffold_cache
 import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)
@@ -23,10 +25,11 @@ class ClassificationTest(unittest.TestCase):
         scaffold_dir = test_dir + '/fixtures/scaffolds/scene_type'
         output_model_path = test_dir + '/fixtures/tmp/scene_type_test'
         trainer = Trainer(scaffold_dir, num_steps=100)
-        trainer.purge_cache()
+        clear_scaffold_cache(scaffold_dir)
         trainer.prepare()
         benchmark_info = trainer.train(output_model_path)
         self.assertEqual(benchmark_info['test_accuracy'] >= 0.80, True)
+        validate_model(output_model_path)
 
     def test_3_run_scene_type(self):
         runner = Runner(test_dir + '/fixtures/tmp/scene_type_test')
