@@ -7,7 +7,7 @@ test_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(test_dir + '/../')
 import tensorflow as tf
 from scipy import misc
-from transferflow.object_detection import trainer
+from transferflow.object_detection.trainer import Trainer
 from transferflow.object_detection.runner import Runner
 from transferflow.utils import *
 import logging
@@ -30,10 +30,10 @@ class ObjectDetectionTest(unittest.TestCase):
         self.assertEqual(len(rects), 16)
 
     def test_2_train_faces(self):
-        bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
-        train_bounding_boxes = bounding_boxes[0:180]
-        test_bounding_boxes = bounding_boxes[180:]
-        trainer.train(train_bounding_boxes, test_bounding_boxes, test_dir + '/fixtures/tmp/faces_test', {'num_steps': 1000})
+        trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', num_steps=1000)
+        trainer.prepare()
+        benchmark_info = trainer.train(test_dir + '/fixtures/tmp/faces_test')
+        self.assertEqual(benchmark_info['test_accuracy'] >= 0.80, True)
 
     def test_3_run_faces(self):
         runner = Runner(test_dir + '/fixtures/tmp/faces_test')
@@ -47,10 +47,9 @@ class ObjectDetectionTest(unittest.TestCase):
         self.assertEqual(len(rects) <= 20, True)
 
     def test_4_train_faces_lstm(self):
-        bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
-        train_bounding_boxes = bounding_boxes[0:180]
-        test_bounding_boxes = bounding_boxes[180:]
-        trainer.train(train_bounding_boxes, test_bounding_boxes, test_dir + '/fixtures/tmp/faces_lstm_test', {'num_steps': 1000, 'use_lstm': True, 'rnn_len': 5})
+        trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', num_steps=1000, use_lstm=True, rnn_len=5)
+        trainer.prepare()
+        trainer.train(test_dir + '/fixtures/tmp/faces_lstm_test')
 
     def test_5_run_faces_lstm(self):
         runner = Runner(test_dir + '/fixtures/tmp/faces_lstm_test', {'use_lstm': True, 'rnn_len': 5})
@@ -63,9 +62,6 @@ class ObjectDetectionTest(unittest.TestCase):
         self.assertEqual(len(rects) <= 200, True)
 
     def test_6_train_faces_resnet(self):
-        bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
-        train_bounding_boxes = bounding_boxes[0:180]
-        test_bounding_boxes = bounding_boxes[180:]
         options = {
             'num_steps': 1000,
             'slim_top_lname': 'resnet_v1_101/block4',
@@ -73,7 +69,9 @@ class ObjectDetectionTest(unittest.TestCase):
             'slim_basename': 'resnet_v1_101',
             'slim_ckpt': test_dir + '/../models/resnet_v1_101/model.ckpt'
         }
-        trainer.train(train_bounding_boxes, test_bounding_boxes, test_dir + '/fixtures/tmp/faces_resnet_test', options)
+        trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', **options)
+        trainer.prepare()
+        trainer.train(test_dir + '/fixtures/tmp/faces_resnet_test')
 
     def test_7_run_faces_resnet(self):
         options = {

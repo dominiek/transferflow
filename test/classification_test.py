@@ -7,7 +7,7 @@ test_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(test_dir + '/../')
 import tensorflow as tf
 from scipy import misc
-from transferflow.classification import trainer
+from transferflow.classification.trainer import Trainer
 from transferflow.classification.runner import Runner
 from transferflow.utils import *
 import logging
@@ -21,9 +21,12 @@ class ClassificationTest(unittest.TestCase):
 
     def test_2_train_scene_type(self):
         scaffold_dir = test_dir + '/fixtures/scaffolds/scene_type'
-        base_graph_path = test_dir + '/../models/inception_v3/model.pb'
         output_model_path = test_dir + '/fixtures/tmp/scene_type_test'
-        trainer.train(scaffold_dir, base_graph_path, output_model_path, {'num_steps': 100})
+        trainer = Trainer(scaffold_dir, num_steps=100)
+        trainer.purge_cache()
+        trainer.prepare()
+        benchmark_info = trainer.train(output_model_path)
+        self.assertEqual(benchmark_info['test_accuracy'] >= 0.80, True)
 
     def test_3_run_scene_type(self):
         runner = Runner(test_dir + '/fixtures/tmp/scene_type_test')

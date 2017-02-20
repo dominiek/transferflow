@@ -20,7 +20,7 @@ make
 make download
 ```
 
-## Example: Transfer Learning for Classification
+## Example: Classification
 
 First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/scene_type](test/fixtures/scaffolds/scene_type) that has two sets of images:
 
@@ -30,19 +30,17 @@ First, your training data needs to be formatted like a Standard Scaffold. See [F
 We will use this to train a model for Scene Type detection (Indoor VS Outdoor).
 
 ```python
-from transferflow.classification import trainer
+from transferflow.classification.trainer import Trainer
 
-# Our training data
+# Instantiate Trainer with training data and configuration
 scaffold_path = './test/fixtures/scaffolds/scene_type'
+trainer = Trainer(scaffold_path, num_steps=1000)
 
-# The base Inception model that we'll use for training
-base_graph_path = './models/inception_v3/model.pb'
+# Prepare session (calculates Bottleneck files)
+trainer.prepare()
 
-# Output model path
-output_model_path = './scene_type_model'
-
-# Run training sequence for 1000 iterations
-_, benchmark_info = trainer.train(scaffold_path, base_graph_path, output_model_path, {'num_steps': 1000})
+# Train new model and save
+benchmark_info = trainer.train('./scene_type_model')
 ```
 
 We now have a newly created model in `./scene_type_model` which we can use as follows:
@@ -58,7 +56,7 @@ print(predicted_labels)
 
 This will output the predicted labels for this image ordered by score.
 
-## Example: Transfer Learning for Object Detection
+## Example: Object Detection
 
 First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/faces](test/fixtures/scaffolds/faces) that has the following:
 
@@ -68,21 +66,17 @@ First, your training data needs to be formatted like a Standard Scaffold. See [F
 We'll use this to train a face object detector.
 
 ```python
-from transferflow.object_detection import trainer
+from transferflow.object_detection.trainer import Trainer
 
-# Our training data
+# Instantiate trainer with training data and configuration
 scaffold_path = './test/fixtures/scaffolds/faces'
+trainer = Trainer(scaffold_path, num_steps=1000)
 
-# Get bounding boxes, and specify train/test ratio
-bounding_boxes = bounding_boxes_for_scaffold(test_dir + '/fixtures/scaffolds/faces')
-train_bounding_boxes = bounding_boxes[0:180]
-test_bounding_boxes = bounding_boxes[180:]
+# Prepare session (splits up test/train data)
+trainer.prepare()
 
-# Output model path
-output_model_path = './faces_model'
-
-# Run training sequence for 1000 iterations
-trainer.train(train_bounding_boxes, test_bounding_boxes, output_model_path, {'num_steps': 1000})
+# Train new model and save
+trainer.train('/faces_model')
 ```
 
 Now our object detection model will be stored in `./faces_model`. It can be used like so:
