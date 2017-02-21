@@ -12,6 +12,9 @@ import tensorflow as tf
 from tensorflow.python.framework import tensor_shape
 from tensorflow.python.platform import gfile
 
+import logging
+logger = logging.getLogger("transferflow.classification")
+
 BOTTLENECK_TENSOR_NAME = 'pool_3/_reshape:0'
 BOTTLENECK_TENSOR_SIZE = 2048
 MODEL_INPUT_WIDTH = 299
@@ -37,7 +40,7 @@ def create_image_lists(image_dir, testing_percentage, validation_percentage):
     into training, testing, and validation sets within each label.
   """
   if not gfile.Exists(image_dir):
-    print("Image directory '" + image_dir + "' not found.")
+    logger.warning("Image directory '" + image_dir + "' not found.")
     return None
   result = {}
   sub_dirs = [x[0] for x in os.walk(image_dir)]
@@ -52,15 +55,15 @@ def create_image_lists(image_dir, testing_percentage, validation_percentage):
     dir_name = os.path.basename(sub_dir)
     if dir_name == image_dir:
       continue
-    print("Looking for images in '" + dir_name + "'")
+    logger.debug("Looking for images in '" + dir_name + "'")
     for extension in extensions:
       file_glob = os.path.join(image_dir, dir_name, '*.' + extension)
       file_list.extend(glob.glob(file_glob))
     if not file_list:
-      print('No files found')
+      logger.warning('No files found')
       continue
     if len(file_list) < 20:
-      print('WARNING: Folder has less than 20 images, which may cause issues.')
+      logger.warning('WARNING: Folder has less than 20 images, which may cause issues.')
     label_name = re.sub(r'[^a-z0-9]+', '_', dir_name.lower())
     training_images = []
     testing_images = []
@@ -222,7 +225,7 @@ def get_or_create_bottleneck(sess, image_lists, label_name, index, image_dir,
   bottleneck_path = get_bottleneck_path(image_lists, label_name, index,
                                         bottleneck_dir, category)
   if not os.path.exists(bottleneck_path):
-    print('Creating bottleneck at ' + bottleneck_path)
+    logger.debug('Creating bottleneck at ' + bottleneck_path)
     image_path = get_image_path(image_lists, label_name, index, image_dir,
                                 category)
     if not gfile.Exists(image_path):
@@ -275,7 +278,7 @@ def cache_bottlenecks(sess, image_lists, image_dir, bottleneck_dir,
                                  jpeg_data_tensor, bottleneck_tensor)
         how_many_bottlenecks += 1
         if how_many_bottlenecks % 100 == 0:
-          print(str(how_many_bottlenecks) + ' bottleneck files created.')
+          logger.debug(str(how_many_bottlenecks) + ' bottleneck files created.')
 
 def get_random_cached_bottlenecks(sess, image_lists, how_many, category,
                                   bottleneck_dir, image_dir, jpeg_data_tensor,

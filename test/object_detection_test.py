@@ -11,6 +11,7 @@ from transferflow.object_detection.trainer import Trainer
 from transferflow.object_detection.runner import Runner
 from transferflow.utils import *
 from transferflow.models import validate_model
+
 import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)

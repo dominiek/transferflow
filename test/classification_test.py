@@ -7,14 +7,16 @@ test_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(test_dir + '/../')
 import tensorflow as tf
 from scipy import misc
+
+import logging
+logger = logging.getLogger("transferflow")
+logger.setLevel(logging.DEBUG)
+
 from transferflow.classification.trainer import Trainer
 from transferflow.classification.runner import Runner
 from transferflow.utils import *
 from transferflow.models import validate_model
 from transferflow.scaffolds import clear_scaffold_cache
-import logging
-logger = logging.getLogger("transferflow")
-logger.setLevel(logging.DEBUG)
 
 class ClassificationTest(unittest.TestCase):
 

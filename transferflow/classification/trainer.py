@@ -92,8 +92,8 @@ class Trainer(object):
             is_last_step = (i + 1 == settings['num_steps'])
             if (i % settings['eval_step_interval']) == 0 or is_last_step:
                 train_accuracy, cross_entropy_value = sess.run([evaluation_step, cross_entropy], feed_dict={bottleneck_input: train_bottlenecks, ground_truth_input: train_ground_truth})
-                print('%s: Step %d: Train accuracy = %.1f%%' % (datetime.now(), i, train_accuracy * 100))
-                print('%s: Step %d: Cross entropy = %f' % (datetime.now(), i, cross_entropy_value))
+                logger.debug('%s: Step %d: Train accuracy = %.1f%%' % (datetime.now(), i, train_accuracy * 100))
+                logger.debug('%s: Step %d: Cross entropy = %f' % (datetime.now(), i, cross_entropy_value))
 
             validation_bottlenecks, validation_ground_truth = (
                 get_random_cached_bottlenecks(
@@ -104,7 +104,7 @@ class Trainer(object):
                 evaluation_step,
                 feed_dict={bottleneck_input: validation_bottlenecks,
                            ground_truth_input: validation_ground_truth})
-            print('%s: Step %d: Validation accuracy = %.1f%%' %
+            logger.debug('%s: Step %d: Validation accuracy = %.1f%%' %
                   (datetime.now(), i, validation_accuracy * 100))
 
         # We've completed all our training, so run a final test evaluation on
@@ -117,7 +117,7 @@ class Trainer(object):
             evaluation_step,
             feed_dict={bottleneck_input: test_bottlenecks,
                        ground_truth_input: test_ground_truth})
-        print('Final test accuracy = %.1f%%' % (test_accuracy * 100))
+        logger.info('Model trained, final test accuracy = %.1f%%' % (test_accuracy * 100))
 
         benchmark_info = {
             'validation_accuracy': float(validation_accuracy),
