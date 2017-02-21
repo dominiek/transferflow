@@ -5,17 +5,23 @@ import string
 import os
 import tensorflow as tf
 import numpy as np
-try:
-    from tensorflow.models.rnn import rnn_cell
-except ImportError:
-    rnn_cell = tf.nn.rnn_cell
+from distutils.version import LooseVersion
+if LooseVersion(tf.__version__) >= LooseVersion('1.0'):
+    rnn_cell = tf.contrib.rnn
+else:
+    try:
+        from tensorflow.models.rnn import rnn_cell
+    except ImportError:
+        rnn_cell = tf.nn.rnn_cell
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import array_ops
 
 random.seed(0)
 np.random.seed(0)
 
+from transferflow.utils import tf_concat
 from utils import train_utils, googlenet_load
+
 
 @ops.RegisterGradient("Hungarian")
 def _hungarian_grad(op, *args):
@@ -91,7 +97,7 @@ def rezoom(settings, pred_boxes, early_feat, early_feat_channels, w_offsets, h_o
                                                        early_feat_channels,
                                                        w_offset, h_offset))
 
-    interp_indices = tf.concat(0, indices)
+    interp_indices = tf_concat(0, indices)
     rezoom_features = train_utils.interp(early_feat,
                                          interp_indices,
                                          early_feat_channels)
@@ -132,9 +138,9 @@ def build_forward(settings, x, phase, reuse):
             cnn_s_pool = tf.nn.avg_pool(cnn_s[:, :, :, :256], ksize=[1, pool_size, pool_size, 1],
                                         strides=[1, 1, 1, 1], padding='SAME')
 
-            cnn_s_with_pool = tf.concat(3, [cnn_s_pool, cnn_s[:, :, :, 256:]])
+            cnn_s_with_pool = tf_concat(3, [cnn_s_pool, cnn_s[:, :, :, 256:]])
             cnn_deconv = deconv(cnn_s_with_pool, output_shape=[settings['batch_size'], settings['grid_height'], settings['grid_width'], 256], channels=[settings['later_feat_channels'], 256])
-            cnn = tf.concat(3, (cnn_deconv, cnn[:, :, :, 256:]))
+            cnn = tf_concat(3, (cnn_deconv, cnn[:, :, :, 256:]))
 
     elif settings['avg_pool_size'] > 1:
         pool_size = settings['avg_pool_size']
@@ -142,7 +148,7 @@ def build_forward(settings, x, phase, reuse):
         cnn2 = cnn[:, :, :, 700:]
         cnn2 = tf.nn.avg_pool(cnn2, ksize=[1, pool_size, pool_size, 1],
                               strides=[1, 1, 1, 1], padding='SAME')
-        cnn = tf.concat(3, [cnn1, cnn2])
+        cnn = tf_concat(3, [cnn1, cnn2])
 
     cnn = tf.reshape(cnn,
                      [settings['batch_size'] * settings['grid_width'] * settings['grid_height'], settings['later_feat_channels']])
@@ -173,8 +179,8 @@ def build_forward(settings, x, phase, reuse):
             pred_logits.append(tf.reshape(tf.matmul(output, conf_weights),
                                          [outer_size, 1, settings['num_classes']]))
 
-        pred_boxes = tf.concat(1, pred_boxes, name='pred_boxes_{}'.format(phase))
-        pred_logits = tf.concat(1, pred_logits, name='pred_logits_{}'.format(phase))
+        pred_boxes = tf_concat(1, pred_boxes, name='pred_boxes_{}'.format(phase))
+        pred_logits = tf_concat(1, pred_logits, name='pred_logits_{}'.format(phase))
         pred_logits_squash = tf.reshape(pred_logits,
                                         [outer_size * settings['rnn_len'], settings['num_classes']])
         pred_confidences_squash = tf.nn.softmax(pred_logits_squash)
@@ -191,7 +197,7 @@ def build_forward(settings, x, phase, reuse):
             if phase == 'train':
                 rezoom_features = tf.nn.dropout(rezoom_features, 0.5)
             for k in range(settings['rnn_len']):
-                delta_features = tf.concat(1, [lstm_outputs[k], rezoom_features[:, k, :] / 1000.])
+                delta_features = tf_concat(1, [lstm_outputs[k], rezoom_features[:, k, :] / 1000.])
                 dim = 128
                 delta_weights1 = tf.get_variable(
                                     'delta_ip1%d' % k,
@@ -212,9 +218,9 @@ def build_forward(settings, x, phase, reuse):
                 scale = settings.get('rezoom_conf_scale', 50)
                 pred_confs_deltas.append(tf.reshape(tf.matmul(ip1, delta_confs_weights) * scale,
                                                     [outer_size, 1, settings['num_classes']]))
-            pred_confs_deltas = tf.concat(1, pred_confs_deltas, name='pred_confs_deltas_{}'.format(phase))
+            pred_confs_deltas = tf_concat(1, pred_confs_deltas, name='pred_confs_deltas_{}'.format(phase))
             if settings['reregress']:
-                pred_boxes_deltas = tf.concat(1, pred_boxes_deltas, name='pred_boxes_deltas_{}'.format(phase))
+                pred_boxes_deltas = tf_concat(1, pred_boxes_deltas, name='pred_boxes_deltas_{}'.format(phase))
             return pred_boxes, pred_logits, pred_confidences, pred_confs_deltas, pred_boxes_deltas
 
     return pred_boxes, pred_logits, pred_confidences
@@ -249,7 +255,7 @@ def build_forward_backward(settings, x, phase, boxes, flags):
         pred_logit_r = tf.reshape(pred_logits,
                                   [outer_size * settings['rnn_len'], settings['num_classes']])
         confidences_loss = (tf.reduce_sum(
-            tf.nn.sparse_softmax_cross_entropy_with_logits(pred_logit_r, true_classes))
+            tf.nn.sparse_softmax_cross_entropy_with_logits(logits=pred_logit_r, labels=true_classes))
             ) / outer_size * settings['solver']['head_weights'][0]
         residual = tf.reshape(perm_truth - pred_boxes * pred_mask,
                               [outer_size, settings['rnn_len'], 4])
@@ -268,7 +274,7 @@ def build_forward_backward(settings, x, phase, boxes, flags):
                 inside = tf.reshape(tf.to_int64((tf.greater(classes, 0))), [-1])
             new_confs = tf.reshape(pred_confs_deltas, [outer_size * settings['rnn_len'], settings['num_classes']])
             delta_confs_loss = tf.reduce_sum(
-                tf.nn.sparse_softmax_cross_entropy_with_logits(new_confs, inside)) / outer_size * settings['solver']['head_weights'][0] * 0.1
+                tf.nn.sparse_softmax_cross_entropy_with_logits(logits=new_confs, labels=inside)) / outer_size * settings['solver']['head_weights'][0] * 0.1
 
             pred_logits_squash = tf.reshape(new_confs,
                                             [outer_size * settings['rnn_len'], settings['num_classes']])

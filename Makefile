@@ -4,7 +4,7 @@ all:
 	cd transferflow/object_detection/utils; make; make hungarian
 
 .PHONY: download
-download: download.resnet download.inception
+download: download.resnet download.inception_v3
 
 .PHONY: download.inception_v3
 download.inception_v3:
