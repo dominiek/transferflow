@@ -22,7 +22,7 @@ class Runner(object):
 
         tf.reset_default_graph()
         self.sess = tf.Session()
-        self.sess.run(tf.initialize_all_variables())
+        self.sess.run(tf.global_variables_initializer())
         load_model_state(self.sess, model_file)
 
         self.pred_boxes = self.sess.graph.get_tensor_by_name('decoder_2/pred_boxes_test:0')

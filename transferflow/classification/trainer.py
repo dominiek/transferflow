@@ -64,7 +64,7 @@ class Trainer(object):
         (train_step, cross_entropy, bottleneck_input, ground_truth_input, final_tensor) = add_final_training_ops(len(self.image_lists.keys()), final_tensor_name, self.bottleneck_tensor, settings['learning_rate'])
 
         # Set up all our weights to their initial default values.
-        init = tf.initialize_variables(tf.all_variables())
+        init = tf.variables_initializer(tf.global_variables())
         sess.run(init)
 
         # Create the operations we need to evaluate the accuracy of our new layer.

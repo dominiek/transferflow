@@ -103,10 +103,10 @@ class Trainer(object):
                 thread.start()
 
             tf.set_random_seed(settings['solver']['rnd_seed'])
-            sess.run(tf.initialize_all_variables())
+            sess.run(tf.global_variables_initializer())
             init_fn = slim.assign_from_checkpoint_fn(
                   settings['slim_ckpt'],
-                  [x for x in tf.all_variables() if x.name.startswith(settings['slim_basename']) and settings['solver']['opt'] not in x.name])
+                  [x for x in tf.global_variables() if x.name.startswith(settings['slim_basename']) and settings['solver']['opt'] not in x.name])
             init_fn(sess)
 
             # train model for N iterations

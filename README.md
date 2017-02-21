@@ -105,10 +105,8 @@ make test
 
 ## Todo
 
-* Rework scaffold and model structures
 * Document formats/structures
 * Fix up classification logging
-* Get rid of Tensorflow deprecation warnings
 * Upgrade Tensorflow version
 * Classification: Refactor bottleneck creation phase
 * Object Detection: Clean up settings
