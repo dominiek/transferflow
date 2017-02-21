@@ -8,9 +8,18 @@ from tensorflow.python.platform import gfile
 import tensorflow as tf
 import shutil
 import time
+from distutils.version import LooseVersion
 
 import logging
 logger = logging.getLogger("transferflow.utils")
+
+TENSORFLOW_VERSION = LooseVersion(tf.__version__)
+
+def tf_concat(axis, values, **kwargs):
+    if TENSORFLOW_VERSION >= LooseVersion('1.0'):
+        return tf.concat(values, axis, **kwargs)
+    else:
+        return tf.concat(axis, values, **kwargs)
 
 def load_meta(path):
     with open(path + '/index.json', 'r') as f:

@@ -19,6 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from transferflow.utils import tf_concat
 
 slim = tf.contrib.slim
 trunc_normal = lambda stddev: tf.truncated_normal_initializer(0.0, stddev)
@@ -91,7 +92,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 32, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -108,7 +109,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 64, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -130,7 +131,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 64, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -147,7 +148,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 64, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -164,7 +165,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 64, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -181,7 +182,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 64, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -198,7 +199,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 128, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -220,7 +221,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 128, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
 
@@ -237,7 +238,7 @@ def inception_v1_base(inputs,
           with tf.variable_scope('Branch_3'):
             branch_3 = slim.max_pool2d(net, [3, 3], scope='MaxPool_0a_3x3')
             branch_3 = slim.conv2d(branch_3, 128, [1, 1], scope='Conv2d_0b_1x1')
-          net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+          net = tf_concat(3, [branch_0, branch_1, branch_2, branch_3])
         end_points[end_point] = net
         if final_endpoint == end_point: return net, end_points
     raise ValueError('Unknown final endpoint %s' % final_endpoint)

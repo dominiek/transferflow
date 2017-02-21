@@ -12,6 +12,10 @@ Current capabilities:
 
 _Please note that this is still under active development. See the TODO list in the bottom._
 
+## Dependencies
+
+* Tensorflow >= 0.12.1 (Tested on `v0.12.1` and `v1.0`)
+
 ## Setup
 
 ```bash
