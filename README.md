@@ -106,7 +106,6 @@ make test
 ## Todo
 
 * Document formats/structures
-* Fix up classification logging
 * Upgrade Tensorflow version
 * Classification: Refactor bottleneck creation phase
 * Object Detection: Clean up settings
