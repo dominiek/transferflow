@@ -11,12 +11,12 @@ _Work in progress. Feedback on this very welcome_
 
 ### 1.2 Model Package Directory Structure
 
-|Path               |Description                            |
-|-------------------|---------------------------------------|
-|`/`                | Model Package Root |
-|`/nnpackage.json`  | Model Package Meta-Data File |
-|`/labels.jsons`    | Default Labels Definition File |
-|`/state`           | Default Model State Directory |
+|Path               | Required? | Description                            |
+|-------------------|-----------|---------------------------------------|
+|`/`                | Required  | Model Package Root |
+|`/nnpackage.json`  | Required  | Model Package Meta-Data File |
+|`/labels.jsons`    | Optional  | Default Labels Definition File |
+|`/state`           | Optional  | Default Model State Directory |
 
 ### 1.3 Model Package Meta-Data File: `nnpackage.json`
 
@@ -50,19 +50,19 @@ Example:
 }
 ```
 
-All fields, attributes in bold are required:
+All attribute options:
 
-|Attribute                 | Description      |
-|--------------------------|------------------|
-|*id*                      |Unique model ID, must be lowercase, no spaces   |
-|*name*                    |Human friendly name of model |
-|*version*                 |Version of this model and state |
-|*engines*                 |Required engines and versions. See _1.4 Engines Information_ |
-|description               |Description of what the model does |
-|nodes                     |Information about key nodes/layers in neural net. See _1.5 Nodes Information_ |
-|author                    |Author information. See _1.6 Author Information_ |
-|labelsDefinitionFile      |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |
-|stateDir                  |Directory where engine keeps state of model. Defaults to `state` |
+|Attribute                 | Required? | Description      |
+|--------------------------|-----------|------------------|
+|id                        |Required   |Unique model ID, must be lowercase, no spaces   |
+|name                      |Required   |Human friendly name of model |
+|version                   |Required   |Version of this model and state |
+|engines                   |Required   |Required engines and versions. See _1.4 Engines Information_ |
+|description               |Optional   |Description of what the model does |
+|nodes                     |Optional   |Information about key nodes/layers in neural net. See _1.5 Nodes Information_ |
+|author                    |Optional   |Author information. See _1.6 Author Information_ |
+|labelsDefinitionFile      |Optional   |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |
+|stateDir                  |Optional   |Directory where engine keeps state of model. Defaults to `state` |
 
 ### 1.4 Engines Information
 
