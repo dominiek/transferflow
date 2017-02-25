@@ -110,11 +110,9 @@ make test
 ## Todo
 
 * Document formats/structures
-* Upgrade Tensorflow version
 * Classification: Refactor bottleneck creation phase
 * Object Detection: Clean up settings
 * Object Detection: Add non-face example
-* Lot's of documentation
 * Object Detection: Allow object detection of different image sizes
 * Object Detection: Create validation set facility
 * Object Detection: Slim down size of detection models (lots of unused nodes in there)
