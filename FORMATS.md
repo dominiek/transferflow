@@ -57,18 +57,18 @@ All attribute options:
 |id                        |Unique model ID, must be lowercase, no spaces   |Required   |
 |name                      |Human friendly name of model |Required   |
 |version                   |Version of this model and state |Required   |
-|engines                   |Required engines and versions. See _1.4 Engines Information_ |Required   |
+|engines                   |Required engines and versions. See _1.4 Model Engines Information_ |Required   |
 |description               |Description of what the model does |Optional   |
-|nodes                     |Information about key nodes/layers in neural net. See _1.5 Nodes Information_ |Optional   |
-|author                    |Author information. See _1.6 Author Information_ |Optional   |
+|nodes                     |Information about key nodes/layers in neural net. See _1.5 Model Nodes Information_ |Optional   |
+|author                    |Author information. See _1.6 MOdel Author Information_ |Optional   |
 |labelsDefinitionFile      |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |Optional   |
 |stateDir                  |Directory where engine keeps state of model. Defaults to `state` |Optional   |
 
-### 1.4 Engines Information
+### 1.4 Model Engines Information
 
-### 1.5 Nodes Information
+### 1.5 Model Nodes Information
 
-### 1.6 Author Information
+### 1.6 Model Author Information
 
 ## 2. Scaffold Package
 
@@ -123,6 +123,96 @@ Example:
 
 ### 3.1 Label Files
 
+All labels are in a JSON stream format, meaning one JSON entry per newline (this allows for streaming label loading). 
+
+Example: 
+
+```json
+{"id": "58745e65bd17c82ec1545a64", "name": "Indoor", "node_id": 0}
+{"id": "58745e69bd17c82ec1545a65", "name": "Outdoor", "node_id": 1}
+```
+
 ### 3.2 Label Definition
 
+In the example below, we have a label definition of name "Indoor" which represents a potential classification by the model. The `node_id` can refer to the output value of the `softmaxOutput` node. (See _1.5 Model Nodes Information_)
+
+```json
+{
+  "id": "58745e65bd17c82ec1545a64", 
+  "name": "Indoor",
+  "description": "Indoor Scene Types including buildings, rooms, fully covered patios, greenhouses, etc.",
+  "node_id": 0
+}
+```
+
+List of possible fields:
+
+
 ### 3.3 Hierarchical Labels
+
+Some models have labels derrived from ontologies such as Wordnet/Imagenet. Here's an example of a hierarchical label definition:
+
+```json
+{
+  "level": 0,
+  "id": "/wordnet/n02071294",
+  "node_id": 22,
+  "name": "killer whale, killer, orca, grampus, sea wolf, Orcinus orca",
+  "parents": [
+    {
+      "level": 1,
+      "id": "/wordnet/n2068974",
+      "expanded": true,
+      "name": "dolphin"
+    },
+    {
+      "level": 2,
+      "id": "/wordnet/n2066707",
+      "expanded": true,
+      "name": "toothed whale"
+    },
+    {
+      "level": 3,
+      "id": "/wordnet/n2062744",
+      "expanded": true,
+      "name": "whale"
+    },
+    {
+      "level": 4,
+      "id": "/wordnet/n2062430",
+      "expanded": true,
+      "name": "cetacean, cetacean mammal, blower"
+    },
+    {
+      "level": 5,
+      "id": "/wordnet/n2062017",
+      "expanded": true,
+      "name": "aquatic mammal"
+    },
+    {
+      "level": 6,
+      "id": "/wordnet/n1886756",
+      "expanded": true,
+      "name": "placental, placental mammal, eutherian, eutherian mammal"
+    },
+    {
+      "level": 7,
+      "id": "/wordnet/n1861778",
+      "expanded": true,
+      "name": "mammal, mammalian"
+    },
+    {
+      "level": 8,
+      "id": "/wordnet/n1471682",
+      "expanded": true,
+      "name": "vertebrate, craniate"
+    },
+    {
+      "level": 9,
+      "id": "/wordnet/n1466257",
+      "expanded": true,
+      "name": "chordate"
+    }
+  ]
+}
+```
