@@ -52,17 +52,17 @@ Example:
 
 All attribute options:
 
-|Attribute                 | Required? | Description      |
-|--------------------------|-----------|------------------|
-|id                        |Required   |Unique model ID, must be lowercase, no spaces   |
-|name                      |Required   |Human friendly name of model |
-|version                   |Required   |Version of this model and state |
-|engines                   |Required   |Required engines and versions. See _1.4 Engines Information_ |
-|description               |Optional   |Description of what the model does |
-|nodes                     |Optional   |Information about key nodes/layers in neural net. See _1.5 Nodes Information_ |
-|author                    |Optional   |Author information. See _1.6 Author Information_ |
-|labelsDefinitionFile      |Optional   |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |
-|stateDir                  |Optional   |Directory where engine keeps state of model. Defaults to `state` |
+| Attribute                | Description      | Required? |
+|--------------------------|------------------|-----------|
+|id                        |Unique model ID, must be lowercase, no spaces   |Required   |
+|name                      |Human friendly name of model |Required   |
+|version                   |Version of this model and state |Required   |
+|engines                   |Required engines and versions. See _1.4 Engines Information_ |Required   |
+|description               |Description of what the model does |Optional   |
+|nodes                     |Information about key nodes/layers in neural net. See _1.5 Nodes Information_ |Optional   |
+|author                    |Author information. See _1.6 Author Information_ |Optional   |
+|labelsDefinitionFile      |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |Optional   |
+|stateDir                  |Directory where engine keeps state of model. Defaults to `state` |Optional   |
 
 ### 1.4 Engines Information
 
@@ -92,6 +92,7 @@ Example:
 {
   "id": "58745c9fbd17c82dd4ff7c9c",
   "name": "Scene Type",
+  "version": 0.1,
   "description": "Classify images into Indoor VS Outdoor scenes",
   "author": {
     "name": "Dominiek Ter Heide",
@@ -102,6 +103,15 @@ Example:
   "cacheDir": "cache"
 }
 ```
+
+| Attribute                | Description      | Required? |
+|--------------------------|------------------|-----------|
+|id                        |Unique model ID, must be lowercase, no spaces   |Required   |
+|name                      |Human friendly name of model |Required   |
+|version                   |Version of this scaffold and its labeled data |Required   |
+|description               |Description of what the model does |Optional   |
+|author                    |Author information. See _1.6 Author Information_ |Optional   |
+|labelsDefinitionFile      |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |Optional   |
 
 ### 2.4 Images Training Data Folder
 
