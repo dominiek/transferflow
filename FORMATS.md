@@ -66,9 +66,62 @@ All attribute options:
 
 ### 1.4 Model Engines Information
 
+The `engines` attribute is used for specifying dependencies for the model. For example, to specify Tensorflow version `1.0`:
+
+```json
+{
+  "engines": {
+    "tensorflow": "1.0"
+  }  
+}
+```
+
+The version value can have the following values:
+
+|Version Specifier|Description|
+|-----------------|-----------|
+|1.0   |Exact version match|
+|>=1.0 |Exact version match or above|
+|<=1.0 |Exact version match or below|
+|\<1.0 |Exact version above|
+|\>1.0 |Exact version below|
+|~1.0  |Approximate (non-strict) version match|
+
 ### 1.5 Model Nodes Information
 
+The `nodes` attribute can be used to embed information about specific layers/nodes/tensors in your neural network. For example tensors for transfer learning, image conversion or the final softmax output layer.
+
+Current list of standardized keys:
+
+|Node ID        |Description|
+|---------------|-----------|
+|softmaxOutput                 |Softmax output layer, for example for a NN classifier|
+|convolutionalRepresentation   |Representation of input after convolutional layers, before it passes through fully connected layer|
+
+Example usage:
+
+```json
+{
+  "nodes": {
+    "softmaxOutput": {
+      "type": "tensor",
+      "id": "retrained_layer:0"
+    },
+    "convolutionalRepresentation": {
+      "type": "tensor",
+      "id": "pool_3/_reshape:0"
+    }
+  }
+}
+```
+
 ### 1.6 Model Author Information
+
+| Attribute                | Description      |
+|--------------------------|------------------|
+|email                     |Author email address |
+|name                      |Author full name |
+|url                       |Author website |
 
 ## 2. Scaffold Package
 
@@ -145,12 +198,22 @@ In the example below, we have a label definition of name "Indoor" which represen
 }
 ```
 
-List of possible fields:
+List of all attributes:
 
+| Attribute                | Description      | Required? |
+|--------------------------|------------------|-----------|
+|id                        |Unique model ID, must be lowercase, no spaces                   |Required   |
+|name                      |Human friendly name of model                                    |Required   |
+|description               |Description of what the model does                              |Optional   |
+|node_id                   |Output value of `softmaxOutput` for network                     |Optional   |
+|level                     |Level of abstraction for hierarchical layers. See _3.3 Hierarchical Labels_ |Optional   |
+|parents                   |Parent labels. See _3.3 Hierarchical Labels_ |Optional   |
 
 ### 3.3 Hierarchical Labels
 
-Some models have labels derrived from ontologies such as Wordnet/Imagenet. Here's an example of a hierarchical label definition:
+Some models have labels derrived from ontologies such as Wordnet/Imagenet. Each label can include a `parents` attribute that can include an array of different labels each referring to a different label in the hierarchy.
+
+Here's an example of a hierarchical label definition for "Killer Whale":
 
 ```json
 {
