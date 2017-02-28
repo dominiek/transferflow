@@ -1,7 +1,13 @@
 
 _Work in progress. Feedback on this very welcome_
 
-# Abstract
+# NNPack Specification 1.0-DRAFT
+
+## Abstract
+
+Most modern Deep Learning frameworks provide great tools for building Neural Networks or other Machine Learning models. Unfortunately, these tools are very low-level and there are many ways to persist and use a given model.
+
+NNPack provides a high-level structure for persisting and sharing Neural Networks. The goal is to provide a developer friendly interface for packaging and distributing Neural Networks including the data needed to create the Neural Network (Model Scaffold)
 
 # Definitions
 
@@ -9,13 +15,15 @@ _Work in progress. Feedback on this very welcome_
 
 ### 1.1 Purpose
 
+A _Model_ contains all information needed to load, run and operate a Machine Learning model. There is meta-data about what the model's purpose is, what the version is, what engine is required and what the expected behavior is.
+
 ### 1.2 Model Package Directory Structure
 
 |Path               | Required? | Description                            |
 |-------------------|-----------|---------------------------------------|
 |`/`                | Required  | Model Package Root |
 |`/nnpackage.json`  | Required  | Model Package Meta-Data File |
-|`/labels.jsons`    | Optional  | Default Labels Definition File |
+|`/labels.json`    | Optional  | Default Labels Definition File |
 |`/state`           | Optional  | Default Model State Directory |
 
 ### 1.3 Model Package Meta-Data File: `nnpackage.json`
@@ -45,7 +53,7 @@ Example:
     "name": "Dominiek Ter Heide",
     "email": "info@dominiek.com"
   },
-  "labelsDefinitionFile": "labels.jsons",
+  "labelsDefinitionFile": "labels.json",
   "stateDir": "state"
 }
 ```
@@ -61,7 +69,7 @@ All attribute options:
 |description               |Description of what the model does |Optional   |
 |nodes                     |Information about key nodes/layers in neural net. See _1.5 Model Nodes Information_ |Optional   |
 |author                    |Author information. See _1.6 MOdel Author Information_ |Optional   |
-|labelsDefinitionFile      |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |Optional   |
+|labelsDefinitionFile      |Path of labels definition. Defaults to `labels.json`. See _3. Label Definitions_ |Optional   |
 |stateDir                  |Directory where engine keeps state of model. Defaults to `state` |Optional   |
 
 ### 1.4 Model Engines Information
@@ -123,21 +131,23 @@ Example usage:
 |name                      |Author full name |
 |url                       |Author website |
 
-## 2. Scaffold Package
+## 2. Model Scaffold Package
 
 ### 2.1 Purpose
 
-### 2.2 Scaffold Package Directory Structure
+A _Model Scaffold_ contains all the data necessary to train a Machine Learning model. It can contain images, text, audio or other data. It has information about the different labels, where the labeled data can be found and the context of this data.
+
+### 2.2 Model Scaffold Package Directory Structure
 
 |Path               |Description                            |
 |-------------------|---------------------------------------|
-|`/`                | Scaffold Root |
-|`/nnscaffold.json` | Scaffold Meta-Data File |
-|`/labels.jsons`    | Labels Definition File |
+|`/`                | Model Scaffold Root |
+|`/nnscaffold.json` | Model Scaffold Meta-Data File |
+|`/labels.json`    | Labels Definition File |
 |`/images`          | Default Images Training Data Folder |
 |`/cache`           | Default Scaffold Cache Directory |
 
-### 2.3 Scaffold Package Meta-Data File: `nnscaffold.json`
+### 2.3 Model Scaffold Package Meta-Data File: `nnscaffold.json`
 
 Example:
 
@@ -152,7 +162,7 @@ Example:
     "email": "info@dominiek.com"
   },
   "labelsDefinitionFile": "labels.json",
-  "trainingDir": "images",
+  "imagesTrainingDir": "images",
   "cacheDir": "cache"
 }
 ```
@@ -165,24 +175,63 @@ Example:
 |description               |Description of what the model does |Optional   |
 |author                    |Author information. See _1.6 Author Information_ |Optional   |
 |labelsDefinitionFile      |Path of labels definition. Defaults to `labels.jsons`. See _3. Label Definitions_ |Optional   |
+|imagesTrainingDir      |Path of images training dir. Defaults to `images`. See _3. Label Definitions_ |Optional   |
 
-### 2.4 Images Training Data Folder
+### 2.4 Images Training Dir
+
+For Computer Vision an `imagesTrainingDir` which defaults to `images/` is expected. In this directory images can be stored for each Label ID (corresponding to the labels in `labels.jsons`). E.g.:
+
+```bash
+images/58745e65bd17c82ec1545a64 # Indoor images root
+images/58745e65bd17c82ec1545a64/restaurant.jpg
+images/58745e69bd17c82ec1545a65 # Outdoor images root
+images/58745e69bd17c82ec1545a65/sunset.jpg
+```
 
 ### 2.4.1 Bounding Boxes for Object Detection
 
-### 2.5 Scaffold Cache Directory
+For Computer Vision, bounding boxes can be specified for each set of images. This requires a file called `bounding_boxes.json`. Here's an example:
+
+```json
+{
+  "images": [
+    {
+      "image_path": "00000000_640x480.png",
+      "bounding_boxes": [
+        {
+          "type": "rect",
+          "x1": 152,
+          "x2": 167,
+          "y1": 115,
+          "y2": 135
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 2.5 Model Scaffold Cache Directory
+
+The scaffold cache directory can be used by engines to store temporary files used in the training process. For example: the practice of generating "bottleneck" files when retraining Inception V3.
 
 ## 3. Label
 
+A label contains information about a possible output/prediction that a model can produce. Also known as class, classification or softmax id.
+
 ### 3.1 Label Files
 
-All labels are in a JSON stream format, meaning one JSON entry per newline (this allows for streaming label loading). 
+All labels are in a JSON format:
 
-Example: 
+Example:
 
 ```json
-{"id": "58745e65bd17c82ec1545a64", "name": "Indoor", "node_id": 0}
-{"id": "58745e69bd17c82ec1545a65", "name": "Outdoor", "node_id": 1}
+{
+  "labels": [
+    {"id": "58745e65bd17c82ec1545a64", "name": "Indoor", "node_id": 0},
+    {"id": "58745e69bd17c82ec1545a65", "name": "Outdoor", "node_id": 1}
+  ]
+}
 ```
 
 ### 3.2 Label Definition
@@ -191,7 +240,7 @@ In the example below, we have a label definition of name "Indoor" which represen
 
 ```json
 {
-  "id": "58745e65bd17c82ec1545a64", 
+  "id": "58745e65bd17c82ec1545a64",
   "name": "Indoor",
   "description": "Indoor Scene Types including buildings, rooms, fully covered patios, greenhouses, etc.",
   "node_id": 0
