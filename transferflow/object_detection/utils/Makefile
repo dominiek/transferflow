@@ -9,8 +9,7 @@ hungarian: hungarian/hungarian.so
 
 hungarian/hungarian.so:
 	cd hungarian && \
-	TF_INC=$$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_include())') && \
+	TF_INC=$$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_include())') && echo $$TF_INC && \
 	if [ `uname` == Darwin ];\
-	then g++ -std=c++11 -shared hungarian.cc -o hungarian.so -fPIC -I -D_GLIBCXX_USE_CXX11_ABI=0$$TF_INC;\
+	then g++ -std=c++11 -shared hungarian.cc -o hungarian.so -fPIC -I $$TF_INC -undefined dynamic_lookup;\
 	else g++ -std=c++11 -shared hungarian.cc -o hungarian.so -fPIC -I  $$TF_INC; fi
-
