@@ -1,3 +1,5 @@
+all:
+	cd transferflow/object_detection/utils; make; make hungarian
 
 .PHONY: clean
 clean:
@@ -6,9 +8,6 @@ clean:
 	rm -rf nnpack.egg-info
 	rm -rf dist
 	rm -rf build
-
-all:
-	cd transferflow/object_detection/utils; make; make hungarian
 
 .PHONY: download
 download: download.resnet download.inception_v3
