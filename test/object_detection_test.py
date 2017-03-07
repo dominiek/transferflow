@@ -10,11 +10,14 @@ from scipy import misc
 from transferflow.object_detection.trainer import Trainer
 from transferflow.object_detection.runner import Runner
 from transferflow.utils import *
-from transferflow.models import validate_model
+from nnpack.models import validate_model
 
 import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)
+
+if not os.path.isdir(test_dir + '/fixtures/tmp'):
+    os.mkdir(test_dir + '/fixtures/tmp')
 
 class ObjectDetectionTest(unittest.TestCase):
 
@@ -70,7 +73,7 @@ class ObjectDetectionTest(unittest.TestCase):
             'slim_top_lname': 'resnet_v1_101/block4',
             'slim_attention_lname': 'resnet_v1_101/block1',
             'slim_basename': 'resnet_v1_101',
-            'slim_ckpt': test_dir + '/../models/resnet_v1_101/model.ckpt'
+            'slim_ckpt': test_dir + '/../models/resnet_v1_101/state/model.ckpt'
         }
         trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', **options)
         trainer.prepare()
@@ -81,7 +84,7 @@ class ObjectDetectionTest(unittest.TestCase):
             'slim_top_lname': 'resnet_v1_101/block4',
             'slim_attention_lname': 'resnet_v1_101/block1',
             'slim_basename': 'resnet_v1_101',
-            'slim_ckpt': test_dir + '/../models/resnet_v1_101/model.ckpt'
+            'slim_ckpt': test_dir + '/../models/resnet_v1_101/state/model.ckpt'
         }
         runner = Runner(test_dir + '/fixtures/tmp/faces_resnet_test', options)
         resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')

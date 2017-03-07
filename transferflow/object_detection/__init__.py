@@ -35,7 +35,7 @@ DEFAULT_SETTINGS = {
     "slim_top_lname": "Mixed_5b",
     "slim_attention_lname": "Mixed_3b",
     "slim_basename": "InceptionV1",
-    "slim_ckpt": models_dir + '/inception_v1/model.ckpt',
+    "slim_ckpt": models_dir + '/inception_v1/state/model.ckpt',
     "num_lstm_layers": 2,
     "image_width": 640,
     "image_height": 480,

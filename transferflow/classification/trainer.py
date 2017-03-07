@@ -9,7 +9,8 @@ import tensorflow as tf
 from tensorflow.python.framework import graph_util
 from tensorflow.python.platform import gfile
 from inception import *
-from transferflow.models import create_empty_model, transfer_model_meta, save_model_benchmark_info
+from transferflow.utils import transfer_model_meta
+from nnpack.models import create_empty_model, save_model_benchmark_info
 
 import logging
 logger = logging.getLogger("transferflow.classification")
@@ -24,7 +25,7 @@ class Trainer(object):
         for key in kwargs:
             self.settings[key] = kwargs[key]
         if not self.settings.has_key('base_graph_path'):
-            self.settings['base_graph_path'] = os.path.dirname(os.path.realpath(__file__)) + '/../../models/inception_v3/model.pb'
+            self.settings['base_graph_path'] = os.path.dirname(os.path.realpath(__file__)) + '/../../models/inception_v3/state/model.pb'
 
     def prepare(self):
         settings = self.settings

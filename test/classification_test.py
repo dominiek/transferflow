@@ -15,8 +15,11 @@ logger.setLevel(logging.DEBUG)
 from transferflow.classification.trainer import Trainer
 from transferflow.classification.runner import Runner
 from transferflow.utils import *
-from transferflow.models import validate_model
-from transferflow.scaffolds import clear_scaffold_cache
+from nnpack.models import validate_model
+from nnpack.scaffolds import clear_scaffold_cache
+
+if not os.path.isdir(test_dir + '/fixtures/tmp'):
+    os.mkdir(test_dir + '/fixtures/tmp')
 
 class ClassificationTest(unittest.TestCase):
 

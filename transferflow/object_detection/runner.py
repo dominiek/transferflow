@@ -7,7 +7,7 @@ from scipy.misc import imread, imresize
 from utils.train_utils import calculate_rectangles, rescale_boxes
 from . import DEFAULT_SETTINGS
 from transferflow.utils import *
-from transferflow.models import load_model_state
+from nnpack.engines._tensorflow import load_model_state
 
 class Runner(object):
 

@@ -8,8 +8,9 @@ import tensorflow as tf
 import numpy as np
 from . import DEFAULT_SETTINGS
 from transferflow.utils import *
-from transferflow.models import create_empty_model, transfer_model_meta, save_model_state, save_model_benchmark_info
-from transferflow.scaffolds import bounding_boxes_for_scaffold
+from nnpack.engines._tensorflow import save_model_state
+from nnpack.models import create_empty_model, save_model_benchmark_info
+from nnpack.scaffolds import bounding_boxes_for_scaffold
 from tensorbox import *
 
 import logging

@@ -15,6 +15,7 @@ _Please note that this is still under active development. See the TODO list in t
 ## Dependencies
 
 * Tensorflow >= 0.12.1 (Tested on `v0.12.1` and `v1.0`)
+* [nnpack](https://github.com/dominiek/nnpack) >= 0.1.0 (Tools & Data Portability for Neural Nets)
 
 ## Setup
 
@@ -26,7 +27,7 @@ make download
 
 ## Example: Classification
 
-First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/scene_type](test/fixtures/scaffolds/scene_type) that has two sets of images:
+First, your training data needs to be formatted like a Standard Scaffold. See [NNPack](https://github.com/dominiek/nnpack) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/scene_type](test/fixtures/scaffolds/scene_type) that has two sets of images:
 
 * 115 images depicting indoor scenes
 * 158 images depicting outdoor scenes
@@ -109,7 +110,6 @@ make test
 
 ## Todo
 
-* Document formats/structures
 * Classification: Refactor bottleneck creation phase
 * Object Detection: Clean up settings
 * Object Detection: Add non-face example

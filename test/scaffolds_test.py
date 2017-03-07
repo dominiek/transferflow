@@ -6,7 +6,7 @@ import time
 test_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(test_dir + '/../')
 import tensorflow as tf
-from transferflow.scaffolds import *
+from nnpack.scaffolds import *
 import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)
