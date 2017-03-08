@@ -43,6 +43,7 @@ class ClassificationTest(unittest.TestCase):
         runner = Runner(test_dir + '/fixtures/tmp/scene_type_test')
         labels = runner.run(test_dir + '/fixtures/images/lake.jpg')
         self.assertEqual(labels[0]['node_id'], 1)
+        self.assertEqual(labels[0]['name'], 'Outdoor')
 
 if __name__ == "__main__":
     unittest.main()

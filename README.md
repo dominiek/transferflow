@@ -118,7 +118,7 @@ make test
 
 ## Todo
 
-* Make base model intake explicit so no path conflicts happen in pip module
+* Classification: Allow base model classification passthru
 * Classification: Refactor bottleneck creation phase
 * Object Detection: Clean up settings
 * Object Detection: Add non-face example

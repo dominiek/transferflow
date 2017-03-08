@@ -2,6 +2,7 @@
 import os
 import shutil
 import sys
+import json
 from datetime import datetime
 
 import tensorflow as tf
@@ -11,6 +12,7 @@ from tensorflow.python.platform import gfile
 from inception import *
 from transferflow.utils import transfer_model_meta
 from nnpack.models import create_empty_model, save_model_benchmark_info
+from nnpack import load_labels
 
 import logging
 logger = logging.getLogger("transferflow.classification")
@@ -27,6 +29,8 @@ class Trainer(object):
             self.settings[key] = kwargs[key]
         if not self.settings.has_key('base_graph_path'):
             self.settings['base_graph_path'] = base_model_path + '/state/model.pb'
+        self.labels = load_labels(scaffold_path)
+
 
     def prepare(self):
         settings = self.settings
@@ -45,6 +49,9 @@ class Trainer(object):
             raise Exception('No valid folders of images found at ' + image_dir)
         if class_count == 1:
             raise Exception('Only one valid folder of images found at ' + image_dir + ', multiple classes are needed for classification')
+
+        # Link labels to new softmax layer
+        self._add_softmax_ids_to_labels()
 
         self.do_distort_images = should_distort_images(settings['flip_left_right'], settings['random_crop'], settings['random_scale'], settings['random_brightness'])
 
@@ -138,8 +145,21 @@ class Trainer(object):
         with gfile.FastGFile(output_graph_path, 'wb') as f:
           f.write(output_graph_def.SerializeToString())
 
+        # Persist labels with softmax IDs
+        with open(output_model_path + '/labels.json', 'w') as f:
+            json.dump({'labels': self.labels.values()}, f)
+
         # Cleanup
         tf.reset_default_graph()
         sess.close()
 
         return benchmark_info
+
+    def _add_softmax_ids_to_labels(self):
+        i = 0
+        for label_id in self.image_lists:
+            if not self.labels.has_key(label_id):
+                raise Exception('Label with ID {} does not appear in labels.json, bad scaffold'.format(label_id))
+            label = self.labels[label_id]
+            label['node_id'] = i
+            i+=1
