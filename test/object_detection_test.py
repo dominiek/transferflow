@@ -19,6 +19,8 @@ logger.setLevel(logging.DEBUG)
 if not os.path.isdir(test_dir + '/fixtures/tmp'):
     os.mkdir(test_dir + '/fixtures/tmp')
 
+base_models_dir = test_dir + '/../models'
+
 class ObjectDetectionTest(unittest.TestCase):
 
     def setUp(self):
@@ -35,7 +37,8 @@ class ObjectDetectionTest(unittest.TestCase):
         self.assertEqual(len(rects), 16)
 
     def test_2_train_faces(self):
-        trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', num_steps=1000)
+        base_model_path = base_models_dir + '/inception_v1'
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', num_steps=100)
         trainer.prepare()
         benchmark_info = trainer.train(test_dir + '/fixtures/tmp/faces_test')
         validate_model(test_dir + '/fixtures/tmp/faces_test')
@@ -53,7 +56,8 @@ class ObjectDetectionTest(unittest.TestCase):
         self.assertEqual(len(rects) <= 20, True)
 
     def test_4_train_faces_lstm(self):
-        trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', num_steps=1000, use_lstm=True, rnn_len=5)
+        base_model_path = base_models_dir + '/inception_v1'
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', num_steps=1000, use_lstm=True, rnn_len=5)
         trainer.prepare()
         trainer.train(test_dir + '/fixtures/tmp/faces_lstm_test')
 
@@ -70,21 +74,20 @@ class ObjectDetectionTest(unittest.TestCase):
     def test_6_train_faces_resnet(self):
         options = {
             'num_steps': 1000,
-            'slim_top_lname': 'resnet_v1_101/block4',
-            'slim_attention_lname': 'resnet_v1_101/block1',
-            'slim_basename': 'resnet_v1_101',
-            'slim_ckpt': test_dir + '/../models/resnet_v1_101/state/model.ckpt'
+            'base_top_layer_name': 'resnet_v1_101/block4',
+            'base_attention_layer_name': 'resnet_v1_101/block1',
+            'base_name': 'resnet_v1_101'
         }
-        trainer = Trainer(test_dir + '/fixtures/scaffolds/faces', **options)
+        base_model_path = base_models_dir + '/resnet_v1_101'
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', **options)
         trainer.prepare()
         trainer.train(test_dir + '/fixtures/tmp/faces_resnet_test')
 
     def test_7_run_faces_resnet(self):
         options = {
-            'slim_top_lname': 'resnet_v1_101/block4',
-            'slim_attention_lname': 'resnet_v1_101/block1',
-            'slim_basename': 'resnet_v1_101',
-            'slim_ckpt': test_dir + '/../models/resnet_v1_101/state/model.ckpt'
+            'base_top_layer_name': 'resnet_v1_101/block4',
+            'base_attention_layer_name': 'resnet_v1_101/block1',
+            'base_name': 'resnet_v1_101'
         }
         runner = Runner(test_dir + '/fixtures/tmp/faces_resnet_test', options)
         resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')

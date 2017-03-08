@@ -17,7 +17,13 @@ _Please note that this is still under active development. See the TODO list in t
 * Tensorflow >= 0.12.1 (Tested on `v0.12.1` and `v1.0`)
 * [nnpack](https://github.com/dominiek/nnpack) >= 0.1.0 (Tools & Data Portability for Neural Nets)
 
-## Setup
+## Install using Pip
+
+```bash
+pip install transferflow
+```
+
+## Install by Source (Recommended)
 
 ```bash
 pip -r requirements.txt
@@ -37,9 +43,10 @@ We will use this to train a model for Scene Type detection (Indoor VS Outdoor).
 ```python
 from transferflow.classification.trainer import Trainer
 
-# Instantiate Trainer with training data and configuration
+# Instantiate Trainer with training data, base model and configuration
 scaffold_path = './test/fixtures/scaffolds/scene_type'
-trainer = Trainer(scaffold_path, num_steps=1000)
+base_model_path = './models/inception_v3'
+trainer = Trainer(base_model_path, scaffold_path, num_steps=1000)
 
 # Prepare session (calculates Bottleneck files)
 trainer.prepare()
@@ -75,7 +82,8 @@ from transferflow.object_detection.trainer import Trainer
 
 # Instantiate trainer with training data and configuration
 scaffold_path = './test/fixtures/scaffolds/faces'
-trainer = Trainer(scaffold_path, num_steps=1000)
+base_model_path = './models/inception_v1'
+trainer = Trainer(base_model_path, scaffold_path, num_steps=1000)
 
 # Prepare session (splits up test/train data)
 trainer.prepare()

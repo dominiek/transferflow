@@ -19,13 +19,14 @@ from . import DEFAULT_SETTINGS
 
 class Trainer(object):
 
-    def __init__(self, scaffold_path, **kwargs):
+    def __init__(self, base_model_path, scaffold_path, **kwargs):
+        self.base_model_path = base_model_path
         self.scaffold_path = scaffold_path
         self.settings = DEFAULT_SETTINGS
         for key in kwargs:
             self.settings[key] = kwargs[key]
         if not self.settings.has_key('base_graph_path'):
-            self.settings['base_graph_path'] = os.path.dirname(os.path.realpath(__file__)) + '/../../models/inception_v3/state/model.pb'
+            self.settings['base_graph_path'] = base_model_path + '/state/model.pb'
 
     def prepare(self):
         settings = self.settings

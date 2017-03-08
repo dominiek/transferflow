@@ -21,11 +21,12 @@ import math
 
 class Trainer(object):
 
-    def __init__(self, scaffold_path, **kwargs):
+    def __init__(self, base_model_path, scaffold_path, **kwargs):
         self.scaffold_path = scaffold_path
         self.settings = DEFAULT_SETTINGS
         for key in kwargs:
             self.settings[key] = kwargs[key]
+        self.settings['base_model_ckpt'] = base_model_path + '/state/model.ckpt'
 
     def prepare(self):
         bounding_boxes = bounding_boxes_for_scaffold(self.scaffold_path)
@@ -106,8 +107,8 @@ class Trainer(object):
             tf.set_random_seed(settings['solver']['rnd_seed'])
             sess.run(tf.global_variables_initializer())
             init_fn = slim.assign_from_checkpoint_fn(
-                  settings['slim_ckpt'],
-                  [x for x in tf.global_variables() if x.name.startswith(settings['slim_basename']) and settings['solver']['opt'] not in x.name])
+                  settings['base_model_ckpt'],
+                  [x for x in tf.global_variables() if x.name.startswith(settings['base_name']) and settings['solver']['opt'] not in x.name])
             init_fn(sess)
 
             # train model for N iterations

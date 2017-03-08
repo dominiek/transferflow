@@ -21,6 +21,8 @@ from nnpack.scaffolds import clear_scaffold_cache
 if not os.path.isdir(test_dir + '/fixtures/tmp'):
     os.mkdir(test_dir + '/fixtures/tmp')
 
+base_models_dir = test_dir + '/../models'
+
 class ClassificationTest(unittest.TestCase):
 
     def setUp(self):
@@ -29,7 +31,8 @@ class ClassificationTest(unittest.TestCase):
     def test_2_train_scene_type(self):
         scaffold_dir = test_dir + '/fixtures/scaffolds/scene_type'
         output_model_path = test_dir + '/fixtures/tmp/scene_type_test'
-        trainer = Trainer(scaffold_dir, num_steps=100)
+        base_model_path = base_models_dir + '/inception_v3'
+        trainer = Trainer(base_model_path, scaffold_dir, num_steps=100)
         clear_scaffold_cache(scaffold_dir)
         trainer.prepare()
         benchmark_info = trainer.train(output_model_path)

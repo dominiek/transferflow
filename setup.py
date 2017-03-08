@@ -27,10 +27,16 @@ class install(_install):
 
 setup(
     name="transferflow",
-    version="0.1.0",
+    version="0.1.1",
     description='Transfer learning for Tensorflow',
     url='https://github.com/dominiek/transferflow',
     cmdclass={'install': install},
     include_package_data=True,
+    install_requires=[
+        'tensorflow>=0.12.1',
+        'nnpack>=0.1.0',
+        'scipy>=0.18.1',
+        'numpy>=1.12.0'
+    ]
     packages=find_packages()
 )

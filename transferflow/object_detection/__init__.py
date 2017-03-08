@@ -1,8 +1,6 @@
 
 import os
 
-models_dir = os.path.dirname(os.path.realpath(__file__)) + '/../../models'
-
 DEFAULT_SETTINGS = {
     "logging": {
         "display_iter": 50,
@@ -32,10 +30,9 @@ DEFAULT_SETTINGS = {
     "early_feat_channels": 256,
     "later_feat_channels": 832,
     "avg_pool_size": 5,
-    "slim_top_lname": "Mixed_5b",
-    "slim_attention_lname": "Mixed_3b",
-    "slim_basename": "InceptionV1",
-    "slim_ckpt": models_dir + '/inception_v1/state/model.ckpt',
+    "base_top_layer_name": "Mixed_5b",
+    "base_attention_layer_name": "Mixed_3b",
+    "base_name": "InceptionV1",
     "num_lstm_layers": 2,
     "image_width": 640,
     "image_height": 480,
