@@ -37,6 +37,6 @@ setup(
         'nnpack>=0.1.0',
         'scipy>=0.18.1',
         'numpy>=1.12.0'
-    ]
+    ],
     packages=find_packages()
 )
