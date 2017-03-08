@@ -119,6 +119,7 @@ make test
 ## Todo
 
 * Classification: Refactor bottleneck creation phase
+* Object Detection: Make hungarian and stitch examples into proper Python modules so they jive well with Pip
 * Object Detection: Clean up settings
 * Object Detection: Add non-face example
 * Object Detection: Allow object detection of different image sizes
