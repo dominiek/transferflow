@@ -51,8 +51,9 @@ package.release:
 
 .PHONY: package.test
 package.test:
-	-pip uninstall transferflow
-	pip install transferflow
+	-pip uninstall -y transferflow
+	pip install --no-cache-dir transferflow
 	mv transferflow transferflow_
-	-python test/classification_test.py
+	-make test
 	mv transferflow_ transferflow
+	pip uninstall -y transferflow
