@@ -20,7 +20,10 @@ class Runner(object):
             graph_def = tf.GraphDef()
             graph_def.ParseFromString(f.read())
             _ = tf.import_graph_def(graph_def, name=namespace)
-        self.softmax_tensor = self.sess.graph.get_tensor_by_name(namespace + '/' + softmax_layer)
+        softmax_path = softmax_layer
+        if namespace:
+            softmax_path = namespace + '/' + softmax_path
+        self.softmax_tensor = self.sess.graph.get_tensor_by_name(softmax_path)
         labels = load_labels(model_dir)
         self.labels_by_node_id = {}
         for label_id in labels:

@@ -28,6 +28,11 @@ class ClassificationTest(unittest.TestCase):
     def setUp(self):
         pass
 
+    def test_1_run_base_model(self):
+        runner = Runner(base_models_dir + '/inception_v3', softmax_layer='softmax:0')
+        labels = runner.run(test_dir + '/fixtures/images/lake.jpg')
+        self.assertEqual(labels[0]['name'], 'boathouse')
+
     def test_2_train_scene_type(self):
         scaffold_dir = test_dir + '/fixtures/scaffolds/scene_type'
         output_model_path = test_dir + '/fixtures/tmp/scene_type_test'
