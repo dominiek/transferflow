@@ -38,7 +38,7 @@ class ObjectDetectionTest(unittest.TestCase):
 
     def test_2_train_faces(self):
         base_model_path = base_models_dir + '/inception_v1'
-        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', num_steps=100)
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', num_steps=1000)
         trainer.prepare()
         benchmark_info = trainer.train(test_dir + '/fixtures/tmp/faces_test')
         validate_model(test_dir + '/fixtures/tmp/faces_test')
