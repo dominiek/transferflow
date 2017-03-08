@@ -48,3 +48,11 @@ package.build:
 .PHONY: package.release
 package.release:
 	twine upload dist/*
+
+.PHONY: package.test
+package.test:
+	-pip uninstall transferflow
+	pip install transferflow
+	mv transferflow transferflow_
+	-python test/classification_test.py
+	mv transferflow_ transferflow
