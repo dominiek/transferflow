@@ -41,7 +41,7 @@ test: $(UNIT_TEST_FILES)
 
 .PHONY: package.build
 package.build:
-	rm -Rf dist
+	make clean
 	python setup.py sdist
 	python setup.py bdist_wheel
 
