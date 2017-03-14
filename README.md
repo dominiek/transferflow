@@ -26,7 +26,7 @@ pip install transferflow
 ## Install by Source (Recommended)
 
 ```bash
-pip -r requirements.txt
+pip install -r requirements.txt
 make
 make download
 ```
