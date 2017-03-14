@@ -62,7 +62,7 @@ from transferflow.classification.runner import Runner
 
 # Our new model
 runner = Runner('./scene_type_model')
-predicted_labels = runner.run('./fixtures/images/lake.jpg')
+predicted_labels = runner.run('./test/fixtures/images/lake.jpg')
 print(predicted_labels)
 ```
 
