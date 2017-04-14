@@ -9,3 +9,5 @@ test/fixtures/scaffolds/scene_type/cache/*
 build
 dist
 transferflow.egg-info/
+.cache
+ve

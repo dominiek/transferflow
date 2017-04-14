@@ -33,10 +33,12 @@ setup(
     cmdclass={'install': install},
     include_package_data=True,
     install_requires=[
-        'tensorflow>=0.12.1',
         'nnpack>=0.1.0',
+        'numpy>=1.12.0',
+        'opencv-python>=3.2.0.6',
+        'pytest>=3.0.6',
         'scipy>=0.18.1',
-        'numpy>=1.12.0'
+        'tensorflow>=0.12.1'
     ],
     packages=find_packages()
 )

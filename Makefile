@@ -8,6 +8,7 @@ clean:
 	rm -rf nnpack.egg-info
 	rm -rf dist
 	rm -rf build
+	rm -rf ve
 
 .PHONY: download
 download: download.resnet download.inception_v3
@@ -34,10 +35,9 @@ download.resnet:
 		mkdir -p resnet_v1_101/state; \
 		mv resnet_v1_101.ckpt resnet_v1_101/state/model.ckpt
 
-UNIT_TEST_FILES := $(wildcard test/*_test.py)
 .PHONY: test
-test: $(UNIT_TEST_FILES)
-	$(foreach file,$(UNIT_TEST_FILES),python $(file);)
+test: ve
+	. ve/bin/activate && find test -name '*_test.py' | PYTHONPATH=. xargs -n 1 python
 
 .PHONY: package.build
 package.build:
@@ -57,3 +57,10 @@ package.test:
 	-make test
 	mv transferflow_ transferflow
 	pip uninstall -y transferflow
+
+ve:
+	virtualenv ve
+	. ./ve/bin/activate && pip install -r requirements.txt
+
+repl: ve
+	. ve/bin/activate && python
