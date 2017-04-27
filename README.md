@@ -14,7 +14,7 @@ _Please note that this is still under active development. See the TODO list in t
 
 ## Dependencies
 
-* Tensorflow >= 0.12.1 (Tested on `v0.12.1` and `v1.0`)
+* Tensorflow >= 0.12.1 (Tested on `v0.12.1`, `v1.0` and `v1.1`)
 * [nnpack](https://github.com/dominiek/nnpack) >= 0.1.0 (Tools & Data Portability for Neural Nets)
 
 ## Install using Pip
