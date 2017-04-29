@@ -3,6 +3,8 @@ test/fixtures/tmp/*
 models/resnet_v1_101
 models/inception_v3/state/model.pb
 models/inception_v3/state/model.pbtxt
+models/slim
+models/inception_resnet_v2
 test/fixtures/scaffolds/scene_type/cache/*
 *.DS_Store
 *.so

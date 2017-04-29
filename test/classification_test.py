@@ -50,5 +50,10 @@ class ClassificationTest(unittest.TestCase):
         self.assertEqual(labels[0]['node_id'], 1)
         self.assertEqual(labels[0]['name'], 'Outdoor')
 
+    def test_4_run_inception_resnet_v2_base_model(self):
+        runner = Runner(base_models_dir + '/inception_resnet_v2', softmax_layer='softmax:0')
+        labels = runner.run(test_dir + '/fixtures/images/lake.jpg')
+        self.assertEqual(labels[0]['name'], 'boathouse')
+
 if __name__ == "__main__":
     unittest.main()
