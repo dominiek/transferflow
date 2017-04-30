@@ -14,14 +14,13 @@ clean:
 download: download.resnet download.inception_v3 download.inception_resnet_v2 download.slim
 
 .PHONY: download.slim
-download.slim: 
+download.slim:
 	cd models; \
 		wget https://github.com/tensorflow/models/archive/f94f163726be25045ef86aebe17f69ca7c2703b9.zip -O slim_models.zip; \
 		unzip slim_models.zip; \
-  	rm -f slim_models.zip; \
+		rm -f slim_models.zip; \
 		mv models-f94f163726be25045ef86aebe17f69ca7c2703b9/slim .; \
 		rm -rf models-f94f163726be25045ef86aebe17f69ca7c2703b9;
-
 
 .PHONY: download.inception_resnet_v2
 download.inception_resnet_v2:
@@ -56,7 +55,11 @@ download.resnet:
 
 .PHONY: test
 test: ve
-	. ve/bin/activate && find test -name '*_test.py' | PYTHONPATH=. xargs -n 1 python
+	. ve/bin/activate && find test -name '*_test.py' | PYTHONPATH=.:$(PWD)/models/slim xargs -n 1 python
+
+.PHONY: test.classification
+test.classification: ve
+	. ve/bin/activate && find test -name 'classification_test.py' | PYTHONPATH=.:$(PWD)/models/slim xargs -n 1 python
 
 .PHONY: package.build
 package.build:
