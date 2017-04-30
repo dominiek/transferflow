@@ -2,22 +2,20 @@
 import os
 import sys
 import unittest
-import time
-test_dir = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(test_dir + '/../')
-import tensorflow as tf
-from scipy import misc
+
+from transferflow.classification.trainer import Trainer
+from transferflow.classification.runner import Runner
+from transferflow.classification.tfslim_runner import SlimRunner
+from transferflow.utils import *
+from nnpack.models import validate_model
+from nnpack.scaffolds import clear_scaffold_cache
 
 import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)
 
-from transferflow.classification.trainer import Trainer
-from transferflow.classification.runner import Runner
-from transferflow.utils import *
-from nnpack.models import validate_model
-from nnpack.scaffolds import clear_scaffold_cache
-
+test_dir = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(test_dir + '/../')
 if not os.path.isdir(test_dir + '/fixtures/tmp'):
     os.mkdir(test_dir + '/fixtures/tmp')
 
@@ -51,7 +49,7 @@ class ClassificationTest(unittest.TestCase):
         self.assertEqual(labels[0]['name'], 'Outdoor')
 
     def test_4_run_inception_resnet_v2_base_model(self):
-        runner = Runner(base_models_dir + '/inception_resnet_v2', softmax_layer='softmax:0')
+        runner = SlimRunner(base_models_dir + '/inception_resnet_v2')
         labels = runner.run(test_dir + '/fixtures/images/lake.jpg')
         self.assertEqual(labels[0]['name'], 'boathouse')
 
