@@ -1,7 +1,5 @@
 
 import os
-import shutil
-import sys
 import json
 from datetime import datetime
 
@@ -11,16 +9,16 @@ from tensorflow.python.framework import graph_util
 from tensorflow.python.platform import gfile
 from inception import *
 from transferflow.utils import transfer_model_meta
+from transferflow.utils import create_image_lists
 from nnpack.models import create_empty_model, save_model_benchmark_info
 from nnpack import load_labels
+from . import DEFAULT_SETTINGS
 
 import logging
 logger = logging.getLogger("transferflow.classification")
 
-from . import DEFAULT_SETTINGS
 
 class Trainer(object):
-
     def __init__(self, base_model_path, scaffold_path, **kwargs):
         self.base_model_path = base_model_path
         self.scaffold_path = scaffold_path
@@ -30,7 +28,6 @@ class Trainer(object):
         if not self.settings.has_key('base_graph_path'):
             self.settings['base_graph_path'] = base_model_path + '/state/model.pb'
         self.labels = load_labels(scaffold_path)
-
 
     def prepare(self):
         settings = self.settings
@@ -60,7 +57,6 @@ class Trainer(object):
             self.distorted_jpeg_data_tensor, self.distorted_image_tensor = add_input_distortions(settings['flip_left_right'], settings['random_crop'], settings['random_scale'], settings['random_brightness'])
         else:
             cache_bottlenecks(sess, self.image_lists, image_dir, bottleneck_dir, self.jpeg_data_tensor, self.bottleneck_tensor)
-
 
     def train(self, output_model_path):
         settings = self.settings
@@ -95,8 +91,8 @@ class Trainer(object):
             # Feed the bottlenecks and ground truth into the graph, and run a training
             # step.
             sess.run(train_step,
-                    feed_dict={bottleneck_input: train_bottlenecks,
-                              ground_truth_input: train_ground_truth})
+                     feed_dict={bottleneck_input: train_bottlenecks,
+                                ground_truth_input: train_ground_truth})
             # Every so often, print out how well the graph is training.
             is_last_step = (i + 1 == settings['num_steps'])
             if (i % settings['eval_step_interval']) == 0 or is_last_step:
@@ -114,7 +110,7 @@ class Trainer(object):
                 feed_dict={bottleneck_input: validation_bottlenecks,
                            ground_truth_input: validation_ground_truth})
             logger.debug('%s: Step %d: Validation accuracy = %.1f%%' %
-                  (datetime.now(), i, validation_accuracy * 100))
+                         (datetime.now(), i, validation_accuracy * 100))
 
         # We've completed all our training, so run a final test evaluation on
         # some new images we haven't used before.
@@ -143,7 +139,7 @@ class Trainer(object):
         output_graph_def = graph_util.convert_variables_to_constants(
             sess, sess.graph.as_graph_def(), [final_tensor_name])
         with gfile.FastGFile(output_graph_path, 'wb') as f:
-          f.write(output_graph_def.SerializeToString())
+            f.write(output_graph_def.SerializeToString())
 
         # Persist labels with softmax IDs
         with open(output_model_path + '/labels.json', 'w') as f:
@@ -158,8 +154,8 @@ class Trainer(object):
     def _add_softmax_ids_to_labels(self):
         i = 0
         for label_id in self.image_lists:
-            if not self.labels.has_key(label_id):
+            if label_id not in self.labels:
                 raise Exception('Label with ID {} does not appear in labels.json, bad scaffold'.format(label_id))
             label = self.labels[label_id]
             label['node_id'] = i
-            i+=1
+            i += 1
