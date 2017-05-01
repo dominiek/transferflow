@@ -4,10 +4,9 @@ from copy import deepcopy
 # from . import DEFAULT_SETTINGS
 import numpy as np
 from models.slim.preprocessing import preprocessing_factory
+from models.slim.nets import nets_factory
 from models.slim.datasets import imagenet
-import importlib
 from nnpack import load_labels
-# from copy import deepcopy
 import logging
 logger = logging.getLogger("transferflow.classification")
 slim = tf.contrib.slim
@@ -18,7 +17,6 @@ class SlimRunner(object):
         tf.reset_default_graph()
         self.model_dir = model_dir
         self.model_name = model_dir.split('/')[-1]  # ex inception_resnet_v2
-        self.model_definition = importlib.import_module('models.slim.nets.' + self.model_name)
         self.preprocess = preprocessing_factory.get_preprocessing(self.model_name,
                                                                   is_training=False)
         labels = load_labels(model_dir)
@@ -30,9 +28,14 @@ class SlimRunner(object):
                 raise Exception('No Softmax node_id is known for label {}, aborting'.format(label_id))
             self.labels_by_node_id[node_id] = label
 
+        self.num_classes = len(self.labels_by_node_id)
+        self.model_definition = nets_factory.get_network_fn(self.model_name, self.num_classes,
+                                                            is_training=False)
+
     def run(self, image_path, num_predictions=10):
 
-        image_size = getattr(self.model_definition, self.model_name).default_image_size
+        # image_size = getattr(self.model_definition, self.model_name).default_image_size
+        image_size = self.model_definition.default_image_size
 
         image_data = tf.gfile.FastGFile(image_path, 'rb').read()
         image = tf.image.decode_jpeg(image_data, channels=3)
@@ -40,11 +43,7 @@ class SlimRunner(object):
         processed_images = tf.expand_dims(processed_image, 0)
 
         # Create the model, use the default arg scope to configure the batch norm parameters.
-        # ex inception_resnet_v2_arg_scope
-        arg_scope = getattr(self.model_definition, self.model_name + '_arg_scope')
-        with slim.arg_scope(arg_scope()):
-            model = getattr(self.model_definition, self.model_name)
-            logits, _ = model(processed_images, num_classes=1001, is_training=False)
+        logits, _ = self.model_definition(processed_images)
         probabilities = tf.nn.softmax(logits)
 
         self.init_fn = slim.assign_from_checkpoint_fn(
