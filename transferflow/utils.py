@@ -100,11 +100,13 @@ def transfer_model_meta(source_path, destination_path):
     shutil.copyfile(source_path + '/nnscaffold.json', destination_path + '/nnpackage.json')
     shutil.copyfile(source_path + '/labels.json', destination_path + '/labels.json')
 
+
 def tf_concat(axis, values, **kwargs):
     if TENSORFLOW_VERSION >= LooseVersion('1.0'):
         return tf.concat(values, axis, **kwargs)
     else:
         return tf.concat(axis, values, **kwargs)
+
 
 def draw_rectangles(orig_image, rects, min_confidence=0.1, color=(0, 0, 255)):
     image = np.copy(orig_image)
@@ -117,11 +119,13 @@ def draw_rectangles(orig_image, rects, min_confidence=0.1, color=(0, 0, 255)):
                 2)
     return image
 
+
 def get_tensors(sess):
     layers = []
     for op in sess.graph.get_operations():
         layers.append(op.name)
     return layers
+
 
 def get_tensor_namespaces(sess):
     namespaces = []
