@@ -98,5 +98,24 @@ class ObjectDetectionTest(unittest.TestCase):
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 200, True)
 
+    def test_8_train_parking_lots(self):
+        base_model_path = base_models_dir + '/inception_v1'
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/parking_lots', num_steps=1000)
+        trainer.prepare()
+        benchmark_info = trainer.train(test_dir + '/fixtures/tmp/parking_lots_test')
+        validate_model(test_dir + '/fixtures/tmp/parking_lots_test')
+        self.assertEqual(benchmark_info['test_accuracy'] >= 0.80, True)
+
+    def test_9_run_parking_lots(self):
+        runner = Runner(test_dir + '/fixtures/tmp/parking_lots_test')
+        for i in range(1, 5):
+            resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/parking_lots/{}.png'.format(i))
+            print('num bounding boxes: {}'.format(len(rects)))
+            print('num raw bounding boxes: {}'.format(len(raw_rects)))
+            new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
+            new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
+            misc.imsave(test_dir + '/fixtures/tmp/parking_lots_validation{}.png'.format(i), new_img)
+            #self.assertEqual(len(rects) >= 4, True)
+
 if __name__ == "__main__":
     unittest.main()

@@ -41,7 +41,6 @@ class Runner(object):
 
         feed = {self.x_in: [img]}
         (np_pred_boxes, np_pred_confidences) = self.sess.run([self.pred_boxes, self.pred_confidences], feed_dict=feed)
-
         rects, raw_rects = calculate_rectangles(settings, np_pred_confidences, np_pred_boxes,
                                         use_stitching=True, rnn_len=settings['rnn_len'], tau=settings['tau'])
         return img, rects, raw_rects
