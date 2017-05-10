@@ -28,8 +28,8 @@ download.inception_resnet_v2:
 		wget --continue http://download.tensorflow.org/models/inception_resnet_v2_2016_08_30.tar.gz; \
 		tar xfzv inception_resnet_v2_2016_08_30.tar.gz; \
 		rm -f inception_resnet_v2_2016_08_30.tar.gz; \
-		mkdir -p inception_resnet_v2/checkpoint; \
-		mv inception_resnet_v2_2016_08_30.ckpt inception_resnet_v2/checkpoint/inception_resnet_v2.ckpt; 
+		mkdir -p inception_resnet_v2/state; \
+		mv inception_resnet_v2_2016_08_30.ckpt inception_resnet_v2/state/inception_resnet_v2.ckpt;
 
 .PHONY: download.inception_v3
 download.inception_v3:
