@@ -8,6 +8,7 @@ from utils.train_utils import calculate_rectangles, rescale_boxes
 from . import DEFAULT_SETTINGS
 from transferflow.utils import *
 from nnpack.engines._tensorflow import load_model_state
+from nnpack import load_labels
 
 class Runner(object):
 
@@ -23,8 +24,9 @@ class Runner(object):
         tf.reset_default_graph()
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
+        # Only support 1 label for now
+        self.label_meta = load_labels(model_file).values()[0]
         load_model_state(self.sess, model_file)
-
         self.pred_boxes = self.sess.graph.get_tensor_by_name('decoder_2/pred_boxes_test:0')
         self.pred_confidences = self.sess.graph.get_tensor_by_name('decoder_2/pred_confidences_test:0')
         self.x_in = self.sess.graph.get_tensor_by_name('fifo_queue_1_DequeueMany:0')
@@ -45,6 +47,10 @@ class Runner(object):
         (np_pred_boxes, np_pred_confidences) = self.sess.run([self.pred_boxes, self.pred_confidences], feed_dict=feed)
         rects, raw_rects = calculate_rectangles(settings, np_pred_confidences, np_pred_boxes,
                                         use_stitching=True, rnn_len=settings['rnn_len'], tau=settings['tau'])
+        for rect in rects:
+            rect.id = self.label_meta['id']
+            rect.name = self.label_meta['name']
+
         if not adjust_rects:
             return img, rects, raw_rects
 

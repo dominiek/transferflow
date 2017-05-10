@@ -7,6 +7,8 @@ class Rect(object):
         self.height = height
         self.confidence = confidence
         self.true_confidence = confidence
+        self.id = None
+        self.name = None
 
     def overlaps(self, other):
         if abs(self.cx - other.cx) > (self.width + other.width) / 1.5:
@@ -37,7 +39,7 @@ class Rect(object):
 
     def iou(self, other):
         return self.intersection(other) / self.union(other)
-    
+
     def __eq__(self, other):
         return (self.cx == other.cx and
             self.cy == other.cy and
