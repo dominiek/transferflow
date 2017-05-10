@@ -10,6 +10,8 @@ from scipy import misc
 from transferflow.object_detection.trainer import Trainer
 from transferflow.object_detection.runner import Runner
 from transferflow.utils import *
+from transferflow.object_detection.utils.rect import Rect
+from scipy.misc import imread
 from nnpack.models import validate_model
 
 import logging
@@ -38,7 +40,7 @@ class ObjectDetectionTest(unittest.TestCase):
 
     def test_2_train_faces(self):
         base_model_path = base_models_dir + '/inception_v1'
-        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', num_steps=1000)
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/faces', num_steps=10000)
         trainer.prepare()
         benchmark_info = trainer.train(test_dir + '/fixtures/tmp/faces_test')
         validate_model(test_dir + '/fixtures/tmp/faces_test')
@@ -49,8 +51,8 @@ class ObjectDetectionTest(unittest.TestCase):
         resized_img, rects, raw_rects = runner.run(test_dir + '/fixtures/images/faces1.png')
         print('num bounding boxes: {}'.format(len(rects)))
         print('num raw bounding boxes: {}'.format(len(raw_rects)))
-        new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
-        new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
+        new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
+        new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
         misc.imsave(test_dir + '/fixtures/tmp/faces_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 20, True)
@@ -97,6 +99,43 @@ class ObjectDetectionTest(unittest.TestCase):
         misc.imsave(test_dir + '/fixtures/tmp/faces_resnet_validation1.png', new_img)
         self.assertEqual(len(rects) >= 12, True)
         self.assertEqual(len(rects) <= 200, True)
+
+    def test_8_train_parking_lots(self):
+        base_model_path = base_models_dir + '/inception_v1'
+        trainer = Trainer(base_model_path, test_dir + '/fixtures/scaffolds/parking_lots', num_steps=1000)
+        trainer.prepare()
+        benchmark_info = trainer.train(test_dir + '/fixtures/tmp/parking_lots_test')
+        validate_model(test_dir + '/fixtures/tmp/parking_lots_test')
+        self.assertEqual(benchmark_info['test_accuracy'] >= 0.80, True)
+
+    def test_9_run_parking_lots(self):
+        runner = Runner(test_dir + '/fixtures/tmp/parking_lots_test')
+        expected_lots = {
+            '1': [424, 306],
+            '2': [145, 496],
+            '3': [428, 735],
+            '4': [715, 668]
+        }
+        for i in range(1, 5):
+            image_path = test_dir + '/fixtures/images/parking_lots/{}.png'.format(i)
+            resized_img, rects, raw_rects = runner.run(image_path.format(i), adjust_rects=False)
+            new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
+            new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
+            misc.imsave(test_dir + '/fixtures/tmp/parking_lots_validation{}.png'.format(i), new_img)
+            resized_img, rects, raw_rects = runner.run(image_path.format(i), adjust_rects=True)
+            orig_img_arr = imread(image_path)[:,:,:3]
+            new_img = draw_rectangles(orig_img_arr, raw_rects, color=(255, 0, 0))
+            new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
+            misc.imsave(test_dir + '/fixtures/tmp/parking_lots_validation_adjusted{}.png'.format(i), new_img)
+            self.assertEqual(len(rects) >= 1, True)
+            self.assertEqual(rects[0].name, 'Parking Lot')
+            expected_lot = expected_lots[str(i)]
+            expected_rect = Rect(expected_lot[0], expected_lot[1], 10, 10, 1)
+            found_lot = False
+            for rect in rects:
+                if rect.overlaps(expected_rect):
+                    found_lot = True
+            self.assertEqual(found_lot, True, 'Excpected lot for image {}'.format(i))
 
 if __name__ == "__main__":
     unittest.main()

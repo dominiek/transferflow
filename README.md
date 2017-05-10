@@ -14,7 +14,7 @@ _Please note that this is still under active development. See the TODO list in t
 
 ## Dependencies
 
-* Tensorflow >= 0.12.1 (Tested on `v0.12.1` and `v1.0`)
+* Tensorflow >= 0.12.1 (Tested on `v0.12.1`, `v1.0` and `v1.1`)
 * [nnpack](https://github.com/dominiek/nnpack) >= 0.1.0 (Tools & Data Portability for Neural Nets)
 
 ## Install using Pip
@@ -70,18 +70,18 @@ This will output the predicted labels for this image ordered by score.
 
 ## Example: Object Detection
 
-First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/faces](test/fixtures/scaffolds/faces) that has the following:
+First, your training data needs to be formatted like a Standard Scaffold. See [Formats](FORMATS.md) for more details. In this example we'll use a pre-prepared Scaffold [test/fixtures/scaffolds/parking_lots](test/fixtures/scaffolds/parking_lots) that has the following:
 
-* 200 images that have people in them
-* 1351 annotated bounding boxes for the faces of each person found in the pictures
+* 40 images (screenshots from Google Maps)
+* 37 annotated bounding boxes for the parking lots found in those satellite images
 
-We'll use this to train a face object detector.
+We'll use this to train a parking lot detector.
 
 ```python
 from transferflow.object_detection.trainer import Trainer
 
 # Instantiate trainer with training data and configuration
-scaffold_path = './test/fixtures/scaffolds/faces'
+scaffold_path = './test/fixtures/scaffolds/parking_lots'
 base_model_path = './models/inception_v1'
 trainer = Trainer(base_model_path, scaffold_path, num_steps=1000)
 
@@ -89,25 +89,25 @@ trainer = Trainer(base_model_path, scaffold_path, num_steps=1000)
 trainer.prepare()
 
 # Train new model and save
-trainer.train('/faces_model')
+trainer.train('/parking_lots')
 ```
 
-Now our object detection model will be stored in `./faces_model`. It can be used like so:
+Now our object detection model will be stored in `./parking_lots`. It can be used like so:
 
 ```python
 from transferflow.object_detection.runner import Runner
 from transferflow.utils import draw_rectangles
 
 # Our new model
-runner = Runner('./faces_model')
+runner = Runner('./parking_lots')
 
 # Run, gets back predicted bounding boxes and a resized image
-resized_img, rects, raw_rects = runner.run('./test/fixtures/images/faces1.png')
+resized_img, rects, raw_rects = runner.run('./test/fixtures/images/parking_lots/1.png')
 
 # Draw all predicted bounding box rectangles on the resized image and store
-new_img = draw_rectangles(resized_img, rects, color=(255, 0, 0))
-new_img = draw_rectangles(new_img, raw_rects, color=(0, 255, 0))
-misc.imsave('./faces_validation1.png', new_image)
+new_img = draw_rectangles(resized_img, raw_rects, color=(255, 0, 0))
+new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
+misc.imsave('./parking_lots_validation.png', new_image)
 ```
 
 ## Unit Tests
@@ -119,13 +119,10 @@ make test
 ## Todo
 
 * Classification: Refactor bottleneck creation phase
+* Classification: Support and benchmark different base models
 * Object Detection: Make hungarian and stitch examples into proper Python modules so they jive well with Pip
 * Object Detection: Clean up settings
-* Object Detection: Add non-face example
-* Object Detection: Allow object detection of different image sizes
-* Object Detection: Create validation set facility
 * Object Detection: Slim down size of detection models (lots of unused nodes in there)
 * Object Detection: Improve naming
 * Object Detection: Refactor TensorBox originated code
 * Make threads shut down gracefully
-* Experiment with different base models
