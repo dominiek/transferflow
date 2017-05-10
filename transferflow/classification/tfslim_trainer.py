@@ -96,8 +96,10 @@ class SlimTrainer(object):
         num_preprocess_threads = 2
         min_queue_examples = 64
 
-        filenames, labels = self.read_labeled_image_list(self.image_dir, self.image_lists,
-                                                         self.labels)
+        filenames, labels = self.read_labeled_image_list(image_dir=self.image_dir,
+                                                         image_lists=self.image_lists,
+                                                         labels=self.labels,
+                                                         category=category)
         filenames = tf.convert_to_tensor(filenames, dtype=tf.string)
         labels = tf.convert_to_tensor(labels, dtype=tf.int32)
         # Makes an input queue
@@ -145,8 +147,7 @@ class SlimTrainer(object):
             variables_to_train.extend(variables)
         return variables_to_train
 
-    def run(self, category, image_lists,
-            image_dir, tune_full_net, output_model_path):
+    def run(self, category, tune_full_net, output_model_path):
         with tf.Graph().as_default():
             tf.logging.set_verbosity(tf.logging.INFO)
             # Create the model, use the default arg scope to configure the batch norm parameters.
@@ -182,8 +183,7 @@ class SlimTrainer(object):
         create_empty_model(output_model_path)
         transfer_model_meta(self.scaffold_path, output_model_path)
 
-        final_loss = self.run(category='training', image_lists=self.image_lists,
-                              image_dir=self.image_dir, tune_full_net=tune_full_net,
+        final_loss = self.run(category='training', tune_full_net=tune_full_net,
                               output_model_path=output_model_path)
         benchmark_info = {
             'final_loss': float(final_loss),

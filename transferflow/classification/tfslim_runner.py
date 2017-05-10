@@ -58,7 +58,7 @@ class SlimRunner(object):
 
         with tf.Session() as sess:
             self.init_fn(sess)
-            np_image, probabilities = sess.run([image, probabilities])
+            _, probabilities = sess.run([image, probabilities])
             probabilities = np.squeeze(probabilities)
             top_k = probabilities.argsort()[-num_predictions:][::-1]
 
