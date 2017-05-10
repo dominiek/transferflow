@@ -128,6 +128,7 @@ class ObjectDetectionTest(unittest.TestCase):
             new_img = draw_rectangles(new_img, rects, color=(0, 255, 0))
             misc.imsave(test_dir + '/fixtures/tmp/parking_lots_validation_adjusted{}.png'.format(i), new_img)
             self.assertEqual(len(rects) >= 1, True)
+            self.assertEqual(rects[0].name, 'Parking Lot')
             expected_lot = expected_lots[str(i)]
             expected_rect = Rect(expected_lot[0], expected_lot[1], 10, 10, 1)
             found_lot = False
