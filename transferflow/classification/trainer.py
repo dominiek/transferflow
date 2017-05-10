@@ -58,6 +58,7 @@ class Trainer(object):
         else:
             cache_bottlenecks(sess, self.image_lists, image_dir, bottleneck_dir, self.jpeg_data_tensor, self.bottleneck_tensor)
 
+
     def train(self, output_model_path):
         settings = self.settings
         image_dir = self.scaffold_path + '/images'
