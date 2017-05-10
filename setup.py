@@ -27,7 +27,7 @@ class install(_install):
 
 setup(
     name="transferflow",
-    version="0.1.6",
+    version="0.1.7",
     description='Transfer learning for Tensorflow',
     url='https://github.com/dominiek/transferflow',
     cmdclass={'install': install},
