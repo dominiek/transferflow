@@ -1,9 +1,11 @@
 import os
+import sys
 import tensorflow as tf
 import json
 
 from transferflow.utils import transfer_model_meta
 from transferflow.utils import create_image_lists
+sys.path.append(os.path.abspath('models/slim'))
 from models.slim.preprocessing import preprocessing_factory
 from models.slim.nets import nets_factory
 from nnpack import load_labels
