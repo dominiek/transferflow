@@ -1,3 +1,4 @@
+import sys
 import tensorflow as tf
 import os
 from copy import deepcopy
@@ -5,7 +6,6 @@ from copy import deepcopy
 import numpy as np
 from models.slim.preprocessing import preprocessing_factory
 from models.slim.nets import nets_factory
-from models.slim.datasets import imagenet
 from nnpack import load_labels
 import logging
 logger = logging.getLogger("transferflow.classification")
