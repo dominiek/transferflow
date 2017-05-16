@@ -8,9 +8,28 @@ clean:
 	rm -rf nnpack.egg-info
 	rm -rf dist
 	rm -rf build
+	rm -rf ve
 
 .PHONY: download
-download: download.resnet download.inception_v3
+download: download.resnet download.inception_v3 download.inception_resnet_v2 download.slim
+
+.PHONY: download.slim
+download.slim:
+	cd models; \
+		wget https://github.com/tensorflow/models/archive/f94f163726be25045ef86aebe17f69ca7c2703b9.zip -O slim_models.zip; \
+		unzip slim_models.zip; \
+		rm -f slim_models.zip; \
+		mv models-f94f163726be25045ef86aebe17f69ca7c2703b9/slim .; \
+		rm -rf models-f94f163726be25045ef86aebe17f69ca7c2703b9;
+
+.PHONY: download.inception_resnet_v2
+download.inception_resnet_v2:
+	cd models; \
+		wget --continue http://download.tensorflow.org/models/inception_resnet_v2_2016_08_30.tar.gz; \
+		tar xfzv inception_resnet_v2_2016_08_30.tar.gz; \
+		rm -f inception_resnet_v2_2016_08_30.tar.gz; \
+		mkdir -p inception_resnet_v2/state; \
+		mv inception_resnet_v2_2016_08_30.ckpt inception_resnet_v2/state/inception_resnet_v2.ckpt;
 
 .PHONY: download.inception_v3
 download.inception_v3:
@@ -21,7 +40,7 @@ download.inception_v3:
 		mv classify_image_graph_def.pb inception_v3/state/model.pb; \
 		mv imagenet_2012_challenge_label_map_proto.pbtxt inception_v3/state/model.pbtxt; \
 		mv LICENSE inception_v3/.; \
-		rm *.jpg; rm *.txt; rm *.tgz \
+		rm *.jpg; rm *.txt; rm *.tgz
 
 .PHONY: download.resnet
 download.resnet:
@@ -34,10 +53,13 @@ download.resnet:
 		mkdir -p resnet_v1_101/state; \
 		mv resnet_v1_101.ckpt resnet_v1_101/state/model.ckpt
 
-UNIT_TEST_FILES := $(wildcard test/*_test.py)
 .PHONY: test
-test: $(UNIT_TEST_FILES)
-	$(foreach file,$(UNIT_TEST_FILES),python $(file);)
+test: ve
+	. ve/bin/activate && find test -name '*_test.py' | PYTHONPATH=. xargs -n 1 python
+
+.PHONY: test.classification
+test.classification: ve
+	. ve/bin/activate && find test -name 'classification_test.py' | PYTHONPATH=. xargs -n 1 python
 
 .PHONY: package.build
 package.build:
@@ -57,3 +79,10 @@ package.test:
 	-make test
 	mv transferflow_ transferflow
 	pip uninstall -y transferflow
+
+ve:
+	virtualenv ve
+	. ./ve/bin/activate && pip install -r requirements.txt
+
+repl: ve
+	. ve/bin/activate && python
