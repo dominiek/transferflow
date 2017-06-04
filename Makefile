@@ -55,11 +55,11 @@ download.resnet:
 
 .PHONY: test
 test: ve
-	. ve/bin/activate && find test -name '*_test.py' | PYTHONPATH=. xargs -n 1 python
+	. ve/bin/activate && find test -name '*_test.py' | xargs -n 1 python
 
 .PHONY: test.classification
 test.classification: ve
-	. ve/bin/activate && find test -name 'classification_test.py' | PYTHONPATH=. xargs -n 1 python
+	. ve/bin/activate && find test -name 'classification_test.py' | xargs -n 1 python
 
 .PHONY: package.build
 package.build:
@@ -76,7 +76,7 @@ package.test:
 	-pip uninstall -y transferflow
 	pip install --no-cache-dir transferflow
 	mv transferflow transferflow_
-	-make test
+	-make test.classification
 	mv transferflow_ transferflow
 	pip uninstall -y transferflow
 

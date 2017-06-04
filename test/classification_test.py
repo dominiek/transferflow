@@ -3,6 +3,9 @@ import os
 import sys
 import unittest
 
+test_dir = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(test_dir + '/../')
+
 from transferflow.classification.trainer import Trainer
 from transferflow.classification.runner import Runner
 from transferflow.classification.tfslim_runner import SlimRunner
@@ -15,8 +18,6 @@ import logging
 logger = logging.getLogger("transferflow")
 logger.setLevel(logging.DEBUG)
 
-test_dir = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(test_dir + '/../')
 if not os.path.isdir(test_dir + '/fixtures/tmp'):
     os.mkdir(test_dir + '/fixtures/tmp')
 
