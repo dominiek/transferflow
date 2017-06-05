@@ -40,6 +40,8 @@ class Trainer(object):
         bottleneck_dir = self.scaffold_path + '/cache/bottlenecks'
 
         self.image_lists = create_image_lists(image_dir, settings['testing_percentage'], settings['validation_percentage'])
+        for label in self.image_lists:
+            category_lists = self.image_lists[label]
         class_count = len(self.image_lists.keys())
 
         if class_count == 0:

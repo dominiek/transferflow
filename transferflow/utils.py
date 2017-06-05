@@ -58,35 +58,25 @@ def create_image_lists(image_dir, testing_percentage, validation_percentage):
         if not file_list:
             logger.warning('No files found')
             continue
-        if len(file_list) < 20:
-            logger.warning('WARNING: Folder has less than 20 images, which may cause issues.')
         label_name = re.sub(r'[^a-z0-9]+', '_', dir_name.lower())
         training_images = []
         testing_images = []
         validation_images = []
+        num_testing_images = int(round(len(file_list) * (testing_percentage / 100.0)))
+        if num_testing_images < 1:
+            num_testing_images = 1
+        num_validation_images = int(round(len(file_list) * (validation_percentage / 100.0)))
+        if num_validation_images < 1:
+            num_validation_images = 1
         for file_name in file_list:
             base_name = os.path.basename(file_name)
-            # We want to ignore anything after '_nohash_' in the file name when
-            # deciding which set to put an image in, the data set creator has a way of
-            # grouping photos that are close variations of each other. For example
-            # this is used in the plant disease data set to group multiple pictures of
-            # the same leaf.
-            hash_name = re.sub(r'_nohash_.*$', '', file_name)
-            # This looks a bit magical, but we need to decide whether this file should
-            # go into the training, testing, or validation sets, and we want to keep
-            # existing files in the same set even if more files are subsequently
-            # added.
-            # To do that, we need a stable way of deciding based on just the file name
-            # itself, so we do a hash of that and then use that to generate a
-            # probability value that we use to assign it.
-            hash_name_hashed = hashlib.sha1(hash_name.encode('utf-8')).hexdigest()
-            percentage_hash = (int(hash_name_hashed, 16) % (65536)) * (100 / 65535.0)
-            if percentage_hash < validation_percentage:
+            if len(validation_images) < num_validation_images:
                 validation_images.append(base_name)
-            elif percentage_hash < (testing_percentage + validation_percentage):
+                continue
+            if len(testing_images) < num_testing_images:
                 testing_images.append(base_name)
-            else:
-                training_images.append(base_name)
+                continue
+            training_images.append(base_name)
         result[label_name] = {
             'dir': dir_name,
             'training': training_images,

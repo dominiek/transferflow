@@ -74,5 +74,16 @@ class ClassificationTest(unittest.TestCase):
         self.assertEqual(labels[0]['node_id'], 1)
         self.assertEqual(labels[0]['name'], 'Outdoor')
 
+    def test_7_train_coffee_roasts(self):
+        scaffold_dir = test_dir + '/fixtures/scaffolds/coffee_roasts'
+        output_model_path = test_dir + '/fixtures/tmp/coffee_roasts_test'
+        base_model_path = base_models_dir + '/inception_v3'
+        trainer = Trainer(base_model_path, scaffold_dir, num_steps=100)
+        clear_scaffold_cache(scaffold_dir)
+        trainer.prepare()
+        benchmark_info = trainer.train(output_model_path)
+        self.assertEqual(benchmark_info['test_accuracy'] >= 0.75, True)
+        validate_model(output_model_path)
+
 if __name__ == "__main__":
     unittest.main()
